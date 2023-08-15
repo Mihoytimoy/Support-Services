@@ -28,3 +28,11 @@
 .dropdownMenu {
     padding-left: 10px;
 }
+
+.id {
+    color: white;
+    position: absolute;
+    bottom: 0;
+    margin-left: 20%;
+    margin-bottom: 10%;
+}

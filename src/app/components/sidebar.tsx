@@ -12,15 +12,19 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import PolicyIcon from '@mui/icons-material/Policy';
 import KeyIcon from '@mui/icons-material/Key';
-import '../css/sidebar.css';
-import { Collapse } from '@mui/material';
+import { Collapse, Typography } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
+import { useAppDispatch, useAppSelector } from "../hooks"; 
+import { saveId } from "../features/counter/counter-slice";
+import '../css/sidebar.css';
+
 
 const drawerWidth = 240;
 
 export default function SideBar(props: any) {
   const router = useRouter();
+  const id = useAppSelector((state) => state.counter.value);
   const [open, setOpen] = React.useState(false);
   
   const expandMenu = () => {
@@ -92,6 +96,9 @@ export default function SideBar(props: any) {
               </List>
             </Collapse>
         </List>
+        <Typography className='id' variant="overline">
+          {id}
+        </Typography>
         </Drawer>
         {props.children}
     </Box>

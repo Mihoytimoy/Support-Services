@@ -1,7 +1,14 @@
-import SignIn from "./components/signin"
+"use client";
+import { Provider } from "react-redux";
+import SignIn from "./components/signin";
+import { store } from "./store";
 
 export default function Login() {
-  return <>
-  <SignIn />
-  </>
+  return (
+    <>
+      <Provider store={store}>
+        <SignIn />
+      </Provider>
+    </>
+  )
 }

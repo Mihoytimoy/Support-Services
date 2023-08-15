@@ -6,6 +6,8 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { useAppDispatch, useAppSelector } from "../hooks"; 
+import { saveId } from "../features/counter/counter-slice";
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 
 import { useRouter } from 'next/navigation';
@@ -15,6 +17,9 @@ import "../css/signin.css";
 
 export default function SignIn() {
   const router = useRouter();
+  const id = useAppSelector((state) => state.counter.value);
+  const dispatch = useAppDispatch();
+  
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -34,14 +39,15 @@ export default function SignIn() {
 
     const response = await fetch(endpoint, options);
     // const result = await response.json();
-
+    const result = data.get('id');
+    if(result !== null) {
+      dispatch(saveId(result.toString()));
+    }
     router.push('/home');
+
     // if(result.data === data.get('name')) {
     // }
 
-    console.log({
-      name: data.get('name')
-    });
   };
 
   return (
@@ -57,10 +63,9 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="name"
-              label="Enter employee id"
-              name="name"
-              autoComplete="name"
+              id="id"
+              label="Employee ID"
+              name="id"
               autoFocus
               InputProps={{
               endAdornment: <InputAdornment position="end">
