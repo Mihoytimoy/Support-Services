@@ -1,0 +1,30 @@
+.MuiPaper-root {
+    max-width: 100%;
+    height: fit-content;
+    background-color: #EAB959;
+    position: relative;
+    margin: auto;
+    top: auto;
+    left: auto;
+    border-color: #EAB959;
+    border-radius: 0px 20px 0px 0px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.MuiListItem-root {
+    color: white;
+}
+
+.MuiDrawer-paperAnchorLeft {
+    max-width: 100%;
+    height: 550px;
+    border-radius: 20px 0px 0px 20px;
+    position: absolute;
+    top: auto;
+    left: auto;
+}
+
+.dropdownMenu {
+    padding-left: 10px;
+}
