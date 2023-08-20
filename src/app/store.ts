@@ -1,5 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "../app/features/counter/counter-slice";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import counterReducer from "./features/support/support-slice";
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
+
+const persistConfig = {
+    key: 'root',
+    storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, counterReducer);
 
 export const store = configureStore({
     reducer: { 

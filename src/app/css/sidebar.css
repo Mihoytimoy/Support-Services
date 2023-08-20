@@ -12,8 +12,9 @@
     border-style: solid;
 }
 
-.MuiListItem-root {
+.MuiListItemButton-root {
     color: white;
+    border-radius: 20px 0px 0px 20px;
 }
 
 .MuiDrawer-paperAnchorLeft {
@@ -27,6 +28,11 @@
 
 .dropdownMenu {
     padding-left: 10px;
+}
+
+.Mui-selected {
+    background-color: white !important;
+    color: #EAB959 !important;
 }
 
 .id {

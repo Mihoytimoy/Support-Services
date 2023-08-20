@@ -1,62 +1,69 @@
 "use client";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
 
 import "../css/home.css";
+import { useForm } from "react-hook-form";
 
 export default function Reset() {
-    const router = useRouter();
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        const JSONdata = JSON.stringify(data);
-        const endpoint = '/api/form';
+    const { handleSubmit, register, formState: { errors } } = useForm({
+        defaultValues: {
+          empId: "",
+          tempPassword: ""
+        },
+        mode: 'onChange',
+      });
 
-        const options = {
-            // The method is POST because we are sending data.
-            method: 'POST',
-            // Tell the server we're sending JSON.
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            // Body of the request is the JSON data we created above.
-            body: JSONdata,
-        }
-  
-        const response = await fetch(endpoint, options);
-        // const result = await response.json();
+    const handleRegistration = (data: any) => {
+        console.log(data);
 
-        router.push('/home');
-        // if(result.data === data.get('name')) {
-        // }
-
-        console.log({
-        name: data.get('name')
-        });
-    };
+      }
 
     return (
         <Grid item xs={3} className="homeForm">
             <Typography component="h1" variant="h5">
                 Reset Password
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <Box component="form" onSubmit={handleSubmit(handleRegistration)} noValidate sx={{ mt: 1 }}>
                 <TextField
+                    {...register('empId', {
+                        required: "Required",
+                        minLength: {
+                            value: 7,
+                            message: "Too Short"
+                        },
+                        maxLength: {
+                            value: 7,
+                            message: "Too Long"
+                        }
+                    })}
                     margin="normal"
-                    required
                     fullWidth
                     id="empId"
                     label="Employee ID"
                     name="empId"
                     autoFocus
+                    error={errors.empId?.message !== undefined ? true : false}
+                    helperText={errors.empId?.message}
                 />     
                 <TextField
+                    {...register('tempPassword', {
+                        required: "Required",
+                        minLength: {
+                            value: 7,
+                            message: "Too Short"
+                        },
+                        maxLength: {
+                            value: 7,
+                            message: "Too Long"
+                        }   
+                    })}
                     margin="normal"
-                    required
                     fullWidth
                     id="tempPassword"
                     label="Temporary Password"
                     name="tempPassword"
+                    error={errors.tempPassword?.message !== undefined ? true : false}
+                    helperText={errors.tempPassword?.message}
                 />
                 <Button
                     className="homeFormButton"

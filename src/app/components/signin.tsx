@@ -6,49 +6,35 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useAppDispatch, useAppSelector } from "../hooks"; 
-import { saveId } from "../features/counter/counter-slice";
+import { useAppDispatch } from "../hooks"; 
+import { saveId } from "../features/support/support-slice";
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 
 import { useRouter } from 'next/navigation';
 import { IconButton, InputAdornment } from '@mui/material';
 
 import "../css/signin.css";
+import { useForm } from 'react-hook-form';
 
 export default function SignIn() {
+  const { handleSubmit, register, formState: { errors } } = useForm({
+    defaultValues: {
+      id: ""
+    },
+    mode: 'onChange',
+  });
+  
   const router = useRouter();
-  const id = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
   
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const JSONdata = JSON.stringify(data);
-    const endpoint = '/api/form';
-
-    const options = {
-      // The method is POST because we are sending data.
-      method: 'POST',
-      // Tell the server we're sending JSON.
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // Body of the request is the JSON data we created above.
-      body: JSONdata,
-    }
-
-    const response = await fetch(endpoint, options);
-    // const result = await response.json();
-    const result = data.get('id');
+  const handleRegistration = (data: any) => {
+    console.log(data);
+    const result = data.id;
     if(result !== null) {
       dispatch(saveId(result.toString()));
     }
     router.push('/home');
-
-    // if(result.data === data.get('name')) {
-    // }
-
-  };
+  }
 
   return (
       <Container component="main" maxWidth="md">
@@ -58,15 +44,27 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Support - Services
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit(handleRegistration)} noValidate sx={{ mt: 1 }}>
             <TextField
+              {...register('id', {
+                required: "Required",
+                minLength: {
+                  value: 7,
+                  message: "Too Short"
+                },
+                maxLength: {
+                  value: 7,
+                  message: "Too Long"
+                }
+              })}
+              name='id'
+              id='id'
               margin="normal"
-              required
               fullWidth
-              id="id"
               label="Employee ID"
-              name="id"
               autoFocus
+              error={errors.id?.message !== undefined ? true : false}
+              helperText={errors.id?.message}
               InputProps={{
               endAdornment: <InputAdornment position="end">
                               <IconButton
