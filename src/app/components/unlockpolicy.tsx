@@ -1,70 +1,83 @@
 "use client";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 
 import "../css/home.css";
 
 export default function UnlockPolicy() {
     const router = useRouter();
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        const JSONdata = JSON.stringify(data);
-        const endpoint = '/api/form';
-
-        const options = {
-        // The method is POST because we are sending data.
-        method: 'POST',
-        // Tell the server we're sending JSON.
-        headers: {
-            'Content-Type': 'application/json',
+    const { handleSubmit, register, formState: { errors } } = useForm({
+        defaultValues: {
+          branchCode: "",
+          prodCode: "",
+          polNo: null
         },
-        // Body of the request is the JSON data we created above.
-        body: JSONdata,
-        }
+        mode: 'onChange',
+      });
 
-        const response = await fetch(endpoint, options);
-        // const result = await response.json();
-
-        router.push('/home');
-        // if(result.data === data.get('name')) {
-        // }
-
-        console.log({
-        name: data.get('name')
-        });
-    };
+    const handleRegistration = (data: any) => {
+        console.log(data);
+      }
 
     return (
         <Grid item xs={3} className="homeForm">
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 18}}>
                 Unlock Policy
             </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit(handleRegistration)} noValidate sx={{ mt: 1 }}>
             <TextField
+                {...register('branchCode', {
+                    required: "Required",
+                    minLength: {
+                        value: 7,
+                        message: "Too Short"
+                    },
+                    maxLength: {
+                        value: 7,
+                        message: "Too Long"
+                    }
+                })}
                 margin="normal"
-                required
                 fullWidth
                 id="branchCode"
                 label="Branch Code"
                 name="branchCode"
                 autoFocus
+                error={errors.branchCode?.message !== undefined ? true : false}
+                helperText={errors.branchCode?.message}
             />     
             <TextField
+                {...register('prodCode', {
+                    required: "Required",
+                    minLength: {
+                        value: 7,
+                        message: "Too Short"
+                    },
+                    maxLength: {
+                        value: 7,
+                        message: "Too Long"
+                    }
+                })}
                 margin="normal"
-                required
                 fullWidth
                 id="prodCode"
                 label="Prod Code"
                 name="prodCode"
+                error={errors.prodCode?.message !== undefined ? true : false}
+                helperText={errors.prodCode?.message}
             />
             <TextField
+                {...register('polNo', {
+                    required: "Required"
+                })}
                 margin="normal"
-                required
                 fullWidth
                 id="polNo"
                 label="Policy No"
                 name="polNo"
+                error={errors.polNo?.message !== undefined ? true : false}
+                helperText={errors.polNo?.message}
             />
             <Button
                 className="homeFormButton"

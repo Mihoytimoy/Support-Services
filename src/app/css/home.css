@@ -38,3 +38,7 @@
     background-color: white;
     color: #EAB959;
 }
+
+.textField:focus{
+    border-color: red;
+}

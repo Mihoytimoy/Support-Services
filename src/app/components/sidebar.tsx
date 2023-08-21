@@ -106,7 +106,7 @@ export default function SideBar(props: any) {
             </Collapse>
         </List>
         <Typography className='id' variant="overline">
-          Name: Timothy
+          Name: 
           <br></br>
           Employee Id: {id}
         </Typography>

@@ -20,7 +20,7 @@ export default function UnlockUser() {
 
     return (
         <Grid item xs={3} className="homeForm">
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 18}}>
                 Unlock User
             </Typography>
             <Box component="form" onSubmit={handleSubmit(handleRegistration)} noValidate sx={{ mt: 1 }}>
