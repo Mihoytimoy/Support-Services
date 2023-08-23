@@ -1,7 +1,7 @@
 
 
 const axios = require('axios');
-export default function unlockPolicy(bCode, pCode, pNo, uId) {
+export function unlockPolicy(bCode, pCode, pNo, uId) {
     axios.post('/support/policy', {
         branch: bCode,
         prodcode: pCode,
@@ -17,7 +17,7 @@ export default function unlockPolicy(bCode, pCode, pNo, uId) {
     })
 }
 
-export default function unlockUser(eId, uId) {
+export function unlockUser(eId, uId) {
     axios.post('/support/user', {
         empId: eId
     }, '/unlock', {

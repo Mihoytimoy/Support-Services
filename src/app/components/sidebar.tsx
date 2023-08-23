@@ -25,9 +25,9 @@ const drawerWidth = 240;
 export default function SideBar(props: any) {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const id: string = useAppSelector((state) => state.counter.id);
-  const mainSelect: number = useAppSelector(state => state.counter.main);
-  const subSelect: number = useAppSelector(state =>state.counter.sub);
+  const id: string = useAppSelector((state) => state.support.id);
+  const mainSelect: number = useAppSelector(state => state.support.main);
+  const subSelect: number = useAppSelector(state =>state.support.sub);
 
   const saveMenu = (main: number, sub: number) => {
     if(mainSelect === 99) {
@@ -106,9 +106,9 @@ export default function SideBar(props: any) {
             </Collapse>
         </List>
         <Typography className='id' variant="overline">
-          Name: 
-          <br></br>
-          Employee Id: {id}
+            Name:
+            <br></br>
+            Employee Id: {id}
         </Typography>
         </Drawer>
         {props.children}
