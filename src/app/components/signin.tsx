@@ -49,11 +49,11 @@ export default function SignIn() {
               {...register('id', {
                 required: "Required",
                 minLength: {
-                  value: 7,
+                  value: 9,
                   message: "Too Short"
                 },
                 maxLength: {
-                  value: 7,
+                  value: 9,
                   message: "Too Long"
                 }
               })}

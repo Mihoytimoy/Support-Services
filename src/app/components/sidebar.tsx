@@ -1,4 +1,5 @@
 "use client";
+import '../css/sidebar.css';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -16,9 +17,7 @@ import { Collapse, Typography } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { useAppSelector, useAppDispatch } from "../hooks"; 
-import '../css/sidebar.css';
 import { mainMenuState, subMenuState } from '../features/support/support-slice';
-
 
 const drawerWidth = 240;
 
@@ -62,11 +61,41 @@ export default function SideBar(props: any) {
               width: drawerWidth,
               boxSizing: 'border-box',
             },
+            '& .MuiPaper-root': {
+              maxWidth: 1,
+              height: 1,
+              backgroundColor: '#EAB959',
+              position: 'relative',
+              top: 'auto',
+              left: 'auto',
+              borderColor: '#EAB959',
+              borderRadius:  '0px 20px 0px 0px',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+
+            },
+            '& .MuiDrawer-paperAnchorLeft': {
+              maxWidth: 1,
+              height: '550px',
+              borderRadius: '20px 0px 0px 20px',
+              position: 'absolute',
+              top: 'auto',
+              left: 'auto',
+            }
           }}
           variant="permanent"
           anchor="left"
       >
-        <List>
+        <List sx={{
+          '& .MuiListItemButton-root': {
+            color: 'white',
+            borderRadius: '20px 0px 0px 20px',
+          },
+          '& .MuiListItemButton-root:hover': {
+            color: '#EAB959',
+            backgroundColor: 'white',
+          }
+        }}>
             <ListItem key={"User Services"} disablePadding>
               <ListItemButton selected={mainSelect === 0} onClick={() => saveMenu(0, 99)}>
                 <ListItemIcon>
@@ -83,7 +112,7 @@ export default function SideBar(props: any) {
                     <ListItemIcon>
                       <LockResetIcon />
                     </ListItemIcon>
-                    <ListItemText primary={"Reset Password"} />
+                    <ListItemText primary={"Reset Password"}/>
                   </ListItemButton>
                 </ListItem>
                 <ListItem key={"Unlock User"} disablePadding onClick={changePage("Unlock User")}>
@@ -105,7 +134,15 @@ export default function SideBar(props: any) {
               </List>
             </Collapse>
         </List>
-        <Typography className='id' variant="overline">
+        <Typography className='id' variant="overline" 
+          sx={{
+              paddingLeft: '10px',
+              marginBottom: '10%',
+              marginLeft: '10%',
+              bottom: 0,
+              position: 'absolute', 
+              color: 'white'
+          }}>
             Name:
             <br></br>
             Employee Id: {id}

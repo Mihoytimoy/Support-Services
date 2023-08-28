@@ -1,21 +1,21 @@
 "use client";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-
-import "../css/home.css";
 import { useForm } from "react-hook-form";
+import { resetPWD } from "../api/get";
 
 export default function Reset() {
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
           empId: "",
-          tempPassword: ""
+          tempPassword: "",
+          userId: "",
         },
         mode: 'onChange',
       });
 
     const handleRegistration = (data: any) => {
         console.log(data);
-
+        resetPWD(data);
       }
 
     return (
@@ -28,11 +28,11 @@ export default function Reset() {
                     {...register('empId', {
                         required: "Required",
                         minLength: {
-                            value: 7,
+                            value: 9,
                             message: "Too Short"
                         },
                         maxLength: {
-                            value: 7,
+                            value: 9,
                             message: "Too Long"
                         }
                     })}
@@ -49,11 +49,11 @@ export default function Reset() {
                     {...register('tempPassword', {
                         required: "Required",
                         minLength: {
-                            value: 7,
+                            value: 3,
                             message: "Too Short"
                         },
                         maxLength: {
-                            value: 7,
+                            value: 8,
                             message: "Too Long"
                         }   
                     })}

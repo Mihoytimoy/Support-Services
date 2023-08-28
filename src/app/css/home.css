@@ -7,7 +7,7 @@
     border-width: 0px;
     border-color: #EAB959;
     box-shadow: 0px 0px 20px #EAB959;
-    padding: 0px;
+    padding: 0px !important;
 }
 
 .homeGrid {

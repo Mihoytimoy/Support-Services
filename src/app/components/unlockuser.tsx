@@ -1,21 +1,20 @@
 "use client";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
-
-import "../css/home.css";
+import { unlockUser } from "../api/put";
 import { useForm } from "react-hook-form";
 
 export default function UnlockUser() {
-    const router = useRouter();
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
           empId: "",
+          userId: "10-1772-1",
         },
         mode: 'onChange',
       });
 
     const handleRegistration = (data: any) => {
         console.log(data);
+        unlockUser(data)
       }
 
     return (
@@ -28,11 +27,11 @@ export default function UnlockUser() {
                     {...register('empId', {
                         required: "Required",
                         minLength: {
-                            value: 7,
+                            value: 9,
                             message: "Too Short"
                         },
                         maxLength: {
-                            value: 7,
+                            value: 9,
                             message: "Too Long"
                         }
                     })}

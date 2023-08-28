@@ -10,7 +10,7 @@ export default function Home(props: any) {
         <Provider store={store}>
             <Container maxWidth="md" className="homeContainer">
                     <SideBar>
-                        {props.children}
+                        {props.children},
                     </SideBar>
             </Container>
         </Provider>

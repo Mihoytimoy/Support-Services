@@ -1,44 +1,8 @@
-.MuiPaper-root {
-    max-width: 100%;
-    height: fit-content;
-    background-color: #EAB959;
-    position: relative;
-    margin: auto;
-    top: auto;
-    left: auto;
-    border-color: #EAB959;
-    border-radius: 0px 20px 0px 0px;
-    border-width: 1px;
-    border-style: solid;
-}
-
-.MuiListItemButton-root {
-    color: white;
-    border-radius: 20px 0px 0px 20px;
-}
-
-.MuiDrawer-paperAnchorLeft {
-    max-width: 100%;
-    height: 550px;
-    border-radius: 20px 0px 0px 20px;
-    position: absolute;
-    top: auto;
-    left: auto;
-}
-
 .dropdownMenu {
-    padding-left: 10px;
+    padding-left: 10px !important;
 }
 
 .Mui-selected {
     background-color: white !important;
     color: #EAB959 !important;
-}
-
-.id {
-    color: white;
-    position: absolute;
-    bottom: 0;
-    margin-left: 20%;
-    margin-bottom: 10%;
 }

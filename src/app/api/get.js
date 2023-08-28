@@ -1,16 +1,13 @@
 
-export default async function resetPWD(eId, tPassword, uId) {
-
+export async function resetPWD(data) {
     const axios = require('axios');
+    const resetUrl = "https://gymp3t84o3.execute-api.ap-southeast-1.amazonaws.com/dev1/support/resetpwd"
+                        + "/" + data.empId
+                        + "/" + data.tempPassword
     
-    await axios.get('/support.resetpwd', {
-        params: {
-            empId: eId,
-            tempPassword: tPassword
-        }
-    }, {
+    await axios.get(resetUrl, {
         headers: {
-            userid: uId
+            userid: data.userId
         }
     }, {
         validateStatus: (status) => {

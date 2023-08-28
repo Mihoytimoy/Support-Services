@@ -1,23 +1,22 @@
 "use client";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-
-import "../css/home.css";
+import { unlockPolicy } from "../api/put";
 
 export default function UnlockPolicy() {
-    const router = useRouter();
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
           branchCode: "",
           prodCode: "",
-          polNo: null
+          polNo: null,
+          userId: ""
         },
         mode: 'onChange',
       });
 
     const handleRegistration = (data: any) => {
         console.log(data);
+        unlockPolicy(data);
       }
 
     return (
@@ -30,7 +29,7 @@ export default function UnlockPolicy() {
                 {...register('branchCode', {
                     required: "Required",
                     minLength: {
-                        value: 7,
+                        value: 2,
                         message: "Too Short"
                     },
                     maxLength: {
@@ -51,7 +50,7 @@ export default function UnlockPolicy() {
                 {...register('prodCode', {
                     required: "Required",
                     minLength: {
-                        value: 7,
+                        value: 2,
                         message: "Too Short"
                     },
                     maxLength: {
