@@ -3,6 +3,8 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { unlockPolicy } from "../api/put";
 
+import style from "../css/home.module.css";
+
 export default function UnlockPolicy() {
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
@@ -20,7 +22,7 @@ export default function UnlockPolicy() {
       }
 
     return (
-        <Grid item xs={3} className="homeForm">
+        <Grid item xs={3} className={style.homeForm}>
             <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 18}}>
                 Unlock Policy
             </Typography>
@@ -79,7 +81,7 @@ export default function UnlockPolicy() {
                 helperText={errors.polNo?.message}
             />
             <Button
-                className="homeFormButton"
+                className={style.homeFormButton}
                 type="submit"
                 fullWidth
                 variant="contained"

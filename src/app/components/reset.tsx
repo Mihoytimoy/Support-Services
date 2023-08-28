@@ -3,6 +3,8 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { resetPWD } from "../api/get";
 
+import style from "../css/home.module.css";
+
 export default function Reset() {
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
@@ -19,7 +21,7 @@ export default function Reset() {
       }
 
     return (
-        <Grid item xs={3} className="homeForm">
+        <Grid item xs={3} className={style.homeForm}>
             <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 18}}>
                 Reset Password
             </Typography>
@@ -66,7 +68,7 @@ export default function Reset() {
                     helperText={errors.tempPassword?.message}
                 />
                 <Button
-                    className="homeFormButton"
+                    className={style.homeFormButton}
                     type="submit"
                     fullWidth
                     variant="contained"
