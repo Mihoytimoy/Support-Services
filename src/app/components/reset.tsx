@@ -4,13 +4,15 @@ import { useForm } from "react-hook-form";
 import { resetPWD } from "../api/get";
 
 import style from "../css/home.module.css";
+import { useAppSelector } from "../hooks";
 
 export default function Reset() {
+    const id: string = useAppSelector((state) => state.support.id);
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
           empId: "",
           tempPassword: "",
-          userId: "",
+          userId: id,
         },
         mode: 'onChange',
       });
@@ -21,7 +23,8 @@ export default function Reset() {
       }
 
     return (
-        <Grid item xs={3} className={style.homeForm}>
+        // <Grid item xs={3} className={style.homeForm}>
+        <>
             <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 18}}>
                 Reset Password
             </Typography>
@@ -76,6 +79,7 @@ export default function Reset() {
                 Reset Password
                 </Button>     
             </Box>
-        </Grid>
+        </>
+        // </Grid>
     )
 }

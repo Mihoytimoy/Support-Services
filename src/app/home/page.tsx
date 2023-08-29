@@ -1,5 +1,5 @@
 "use client";
-import { Container } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import SideBar from "../components/sidebar";
 import { store } from "../store";
 import { Provider } from "react-redux";
@@ -10,7 +10,9 @@ export default function Home(props: any) {
         <Provider store={store}>
             <Container maxWidth="md" className={style.homeContainer}>
                     <SideBar>
+                    <Grid item xs={3} className={style.homeForm}>
                         {props.children}
+                    </Grid>
                     </SideBar>
             </Container>
         </Provider>

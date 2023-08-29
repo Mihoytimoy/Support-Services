@@ -3,12 +3,14 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { unlockUser } from "../api/put";
 import { useForm } from "react-hook-form";
 import style from "../css/home.module.css";
+import { useAppSelector } from "../hooks";
 
 export default function UnlockUser() {
+    const id: string = useAppSelector((state) => state.support.id);
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
           empId: "",
-          userId: "10-1772-1",
+          userId: id
         },
         mode: 'onChange',
       });
@@ -19,7 +21,8 @@ export default function UnlockUser() {
       }
 
     return (
-        <Grid item xs={3} className={style.homeForm}>
+        // <Grid item xs={3} className={style.homeForm}>
+        <>
             <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 18}}>
                 Unlock User
             </Typography>
@@ -54,6 +57,7 @@ export default function UnlockUser() {
                 Unlock User
                 </Button>     
             </Box>
-        </Grid>
+        </>
+        /* </Grid> */
     )
 }
