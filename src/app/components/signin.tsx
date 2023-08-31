@@ -17,20 +17,28 @@ import "../css/signin.css";
 import { useForm } from 'react-hook-form';
 
 export default function SignIn() {
-
   const { handleSubmit, register, formState: { errors } } = useForm({
     defaultValues: {
       id: ""
     },
     mode: 'onChange',
   });
+
+  const useInit = (initCallback: () => void) => {
+    const [initialized, setInitialized] = React.useState(false);
+
+    if(!initialized) {
+      initCallback()
+      setInitialized(true);
+    }
+  };
   
   const router = useRouter();
   const dispatch = useAppDispatch();
-  
-  React.useEffect(() => {
+
+  useInit(() => {
     dispatch(reset());
-  }, [])
+  })
 
   const handleRegistration = (data: any) => {
     console.log(data);
