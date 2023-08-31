@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useAppDispatch } from "../hooks"; 
-import { saveId } from "../features/support/support-slice";
+import { saveId, reset } from "../features/support/support-slice";
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 
 import { useRouter } from 'next/navigation';
@@ -17,6 +17,7 @@ import "../css/signin.css";
 import { useForm } from 'react-hook-form';
 
 export default function SignIn() {
+
   const { handleSubmit, register, formState: { errors } } = useForm({
     defaultValues: {
       id: ""
@@ -27,6 +28,10 @@ export default function SignIn() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   
+  React.useEffect(() => {
+    dispatch(reset());
+  }, [])
+
   const handleRegistration = (data: any) => {
     console.log(data);
     const result = data.id;

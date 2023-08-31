@@ -26,9 +26,10 @@ const supportSlice = createSlice({
         
         subMenuState(state, action:PayloadAction<number>) {
             state.sub = action.payload;
-        }
+        },
+        reset: () => initialState,
     }
 });
 
-export const { saveId, mainMenuState, subMenuState } = supportSlice.actions;
+export const { saveId, mainMenuState, subMenuState, reset } = supportSlice.actions;
 export default supportSlice.reducer;

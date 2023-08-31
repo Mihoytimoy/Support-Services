@@ -4,7 +4,6 @@ import SignIn from "./components/signin";
 import { persistor, store } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
 
-
 export default function Login() {
   return (
     <>
