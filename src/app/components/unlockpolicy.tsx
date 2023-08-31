@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { unlockPolicy } from "../api/put";
 import { useAppSelector } from "../hooks";
 
-import style from "../css/home.module.css";
+import "../css/home.css";
 
 export default function UnlockPolicy() {
     const id: string = useAppSelector((state) => state.support.id);
@@ -24,8 +24,7 @@ export default function UnlockPolicy() {
       }
 
     return (
-        // <Grid item xs={3} className={style.homeForm}>
-        <>
+        <Grid item xs={3} className="homeForm">
             <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 18}}>
                 Unlock Policy
             </Typography>
@@ -88,7 +87,7 @@ export default function UnlockPolicy() {
                     helperText={errors.polNo?.message}
                 />
                 <Button
-                    className={style.homeFormButton}
+                    className="homeFormButton"
                     type="submit"
                     fullWidth
                     variant="contained"
@@ -96,7 +95,6 @@ export default function UnlockPolicy() {
                 Unlock Policy
                 </Button>     
             </Box>
-    </>
-    // </Grid>
+    </Grid>
     )
 }

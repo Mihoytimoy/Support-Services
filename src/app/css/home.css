@@ -15,7 +15,7 @@
     width: 100%;
 }
 
-.homeForm {
+.homeContainer .homeForm {
     width: 100%;
     margin: 24px;
     padding: 24px;
@@ -23,7 +23,7 @@
     border-radius: 15px;
 }
 
-.homeFormButton {
+.homeForm .homeFormButton {
     margin-top: 24px;
     margin-bottom: 24px;
     background-color: #EAB959;
@@ -34,11 +34,11 @@
     box-shadow: 0px;
 }
 
-.MuiButtonBase-root:hover {
+.homeForm .MuiButtonBase-root:hover {
     background-color: white;
     color: #EAB959;
 }
 
-.textField:focus{
+.homeForm .textField:focus{
     border-color: red;
 }
