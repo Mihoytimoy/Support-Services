@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface SupportState {
     id: string;
-    main: number;
-    sub: number
+    main: string;
+    sub: string
 }
 
 const initialState: SupportState = {
     id: "",
-    main: 99,
-    sub: 99
+    main: "",
+    sub: ""
 };
 
 const supportSlice = createSlice({
@@ -20,11 +20,11 @@ const supportSlice = createSlice({
             state.id = action.payload;
         },
 
-        mainMenuState(state, action:PayloadAction<number>) {
+        mainMenuState(state, action:PayloadAction<string>) {
             state.main = action.payload;
         },
         
-        subMenuState(state, action:PayloadAction<number>) {
+        subMenuState(state, action:PayloadAction<string>) {
             state.sub = action.payload;
         },
         reset: () => initialState,

@@ -1,8 +1,58 @@
-.dropdownMenu {
-    padding-left: 10px !important;
+.userInfoBox {
+    padding-left: 2vh;
+    background-color: white;
+    position: relative;
+    height: 80px;
+    width: 100%;
+    border-color: #EAB959;
+    border-bottom-width: 1px;
+    border-bottom-style: hidden;
+}
+
+.userInfoBox .userInfo {
+    /* width: 100%; */
+    margin-left: 15px;
+    margin-right: 15px;
+    position: relative;
+    color: black;
+    font-size: 16px;
+    text-align: left;
+    font-weight: 550;
+    font-family: monospace;
+}
+
+.MuiPaper-root .MuiList-root {
+    padding: 0px;
+}
+
+.MuiList-root .dropdownMenu {
+    margin-right: 20px;
+    padding: 0px;
+    padding-left: 20px;
+    width: 100%;
+    align-content: right;
+}
+
+.MuiListItemText-root .MuiTypography-root {
+    font-weight: 400;
+    font-family: Helvetica;
+    font-size: 17px;
 }
 
 .Mui-selected {
-    background-color: white !important;
-    color: #EAB959 !important;
+    background-color: #EAB959 !important;
+    color: white !important;
 }
+
+.MuiSvgIcon-root { /*Sets user icon to this color*/
+    color: #EAB959;
+}
+
+.Mui-selected .MuiSvgIcon-root { /*Sets icons to this color*/
+    color: white;
+}
+
+.MuiListItemButton-root:hover  .MuiSvgIcon-root { /*change color of icon on hover*/
+    color: white;
+}
+

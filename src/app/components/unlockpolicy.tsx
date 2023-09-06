@@ -25,7 +25,7 @@ export default function UnlockPolicy() {
 
     return (
         <Grid item xs={3} className="homeForm">
-            <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 18}}>
+            <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 25}}>
                 Unlock Policy
             </Typography>
             <Box component="form" onSubmit={handleSubmit(handleRegistration)} noValidate sx={{ mt: 1 }}>
@@ -92,7 +92,7 @@ export default function UnlockPolicy() {
                     fullWidth
                     variant="contained"
                 >
-                Unlock Policy
+                Submit
                 </Button>     
             </Box>
     </Grid>

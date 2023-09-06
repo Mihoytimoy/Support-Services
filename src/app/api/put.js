@@ -38,6 +38,8 @@ export function unlockUser(data) {
   const config = {
     headers: {
       userId: data.userId,
+      "Content-Type": "application/json",
+      "Accept": "application/json"
     },
   };
 

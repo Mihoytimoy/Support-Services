@@ -23,7 +23,7 @@ export default function SignIn() {
     },
     mode: 'onChange',
   });
-
+  //I use this to make sure it only runs once
   const useInit = (initCallback: () => void) => {
     const [initialized, setInitialized] = React.useState(false);
 
@@ -53,8 +53,8 @@ export default function SignIn() {
       <Container component="main" maxWidth="md">
         <CssBaseline />
         <Box className="outerBox">
-          <Avatar sx={{width: 100, height: 100}} src='\resources\standardinsurancelogo.png'/>
-          <Typography component="h1" variant="h5">
+          <Box component="img" sx={{width: '75%', height: 'max-content'}} src='\resources\standardinsurancelogo.png'/><br />
+          <Typography component="h1" variant="h4" sx={{width: '100%', textAlign: 'center', color: 'black', fontFamily: 'monospace'}}>
             Support - Services
           </Typography>
           <Box component="form" onSubmit={handleSubmit(handleRegistration)} noValidate sx={{ mt: 1 }}>

@@ -13,6 +13,9 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import PolicyIcon from '@mui/icons-material/Policy';
 import KeyIcon from '@mui/icons-material/Key';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
 import { Collapse, Typography } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
@@ -22,21 +25,40 @@ import { mainMenuState, subMenuState } from '../features/support/support-slice';
 const drawerWidth = 240;
 
 export default function SideBar(props: any) {
+  const [userId, setUserId] = React.useState("");
   const router = useRouter();
   const dispatch = useAppDispatch();
   const id: string = useAppSelector((state) => state.support.id);
-  const mainSelect: number = useAppSelector(state => state.support.main);
-  const subSelect: number = useAppSelector(state =>state.support.sub);
+  let mainSelect: string = useAppSelector(state => state.support.main);
+  let subSelect: string = useAppSelector(state =>state.support.sub);
 
-  const saveMenu = (main: number, sub: number) => {
-    if(mainSelect === 99) {
-      dispatch(mainMenuState(main));
-    }else if(mainSelect !== 99 && sub === 99) {
-      dispatch(mainMenuState(99))
-    }else if(mainSelect !== 99 && sub !== 99) {
-      dispatch(subMenuState(sub));
+  
+  const useInit = (initCallback: () => void) => {
+    const [initialized, setInitialized] = React.useState(false);
+    if(!initialized) {
+      initCallback()
+      setInitialized(true);
     }
-    
+  };
+
+  useInit(() => {
+    setUserId(id);
+  })
+
+  React.useEffect(() => {
+    setUserId(id)
+  }, []);
+
+  const saveMenu = (main:string, sub:string) => { //code here changes values in the store that concern the menu selections
+    if(mainSelect === "") { //check if nothing has been selected yet
+      dispatch(mainMenuState(main));
+    }else if(mainSelect === main && sub === "") { //closing the menu by clicking same menu again
+      dispatch(mainMenuState(""));
+    }else if(mainSelect !== "" && sub === "") { //changing menu selections
+      dispatch(mainMenuState(main));
+    }else if(mainSelect !== "" && sub !== "") { //changing submenu selections
+      dispatch(subMenuState(sub));
+    };
   }
 
   const changePage = (page: string) => () => {
@@ -47,11 +69,13 @@ export default function SideBar(props: any) {
       break;
       case page = "Unlock Policy":  router.push('/unlock-policy');
       break;
+      case page = "On-Hold":  router.push('/on-hold');
+      break;
     }
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', maxHeight: '550px'}}>
       <CssBaseline />
       <Drawer
         sx={{
@@ -64,20 +88,18 @@ export default function SideBar(props: any) {
             '& .MuiPaper-root': {
               maxWidth: 1,
               height: 1,
-              backgroundColor: '#EAB959',
               position: 'relative',
               top: 'auto',
               left: 'auto',
-              borderColor: '#EAB959',
               borderRadius:  '0px 20px 0px 0px',
               borderWidth: '1px',
-              borderStyle: 'solid',
+              borderStyle: 'hidden',
 
             },
             '& .MuiDrawer-paperAnchorLeft': {
               maxWidth: 1,
               height: '550px',
-              borderRadius: '20px 0px 0px 20px',
+              borderRadius: '10px 0px 0px 10px',
               position: 'absolute',
               top: 'auto',
               left: 'auto',
@@ -86,29 +108,46 @@ export default function SideBar(props: any) {
           variant="permanent"
           anchor="left"
       >
+          <Box component="img" 
+            sx={{margin: '10px auto 0px auto',
+                 width: .8, 
+                 height: 'fit-content',
+                }}
+            src='\resources\standardinsurancelogo.png' /><br />
+        <Box component="div" className="userInfoBox">
+            <Box component='div' sx={{display: 'flex', alignItems: 'center'}}>
+              <AccountCircleIcon fontSize='large'/>
+              <Typography className="userInfo">
+                Timothy Mendoza 
+                <br/>
+                ID: {userId}
+              </Typography>
+            </Box>
+        </Box>
         <List sx={{
           '& .MuiListItemButton-root': {
-            color: 'white',
-            borderRadius: '20px 0px 0px 20px',
+            color: 'black',
+            borderRadius: '10px 0px 0px 10px',
           },
           '& .MuiListItemButton-root:hover': {
-            color: '#EAB959',
-            backgroundColor: 'white',
+            color: 'white',
+            backgroundColor: '#EAB959',
           }
         }}>
+          {/* User Services Menu */}
             <ListItem key={"User Services"} disablePadding>
-              <ListItemButton selected={mainSelect === 0} onClick={() => saveMenu(0, 99)}>
+              <ListItemButton selected={mainSelect === "User Services"} onClick={() => saveMenu("User Services", "")}>
                 <ListItemIcon>
                     <ManageAccountsIcon fontSize='large'/>  
                 </ListItemIcon>
                 <ListItemText primary={"User Services"} />
-                {mainSelect === 0 ? <ExpandLess /> : <ExpandMore />}
+                {mainSelect === "User Services" ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
             </ListItem>
-            <Collapse in={mainSelect === 0 ? true : false} timeout="auto" unmountOnExit>
+            <Collapse in={mainSelect === "User Services" ? true : false} timeout="auto" unmountOnExit>
               <List component="div" className='dropdownMenu'>
                 <ListItem key={"Reset Password"} disablePadding onClick={changePage("Reset Password")}>
-                  <ListItemButton selected={subSelect === 0} onClick={() => saveMenu(0, 0)}>
+                  <ListItemButton selected={subSelect === "Reset Password"} onClick={() => saveMenu("User Services", "Reset Password")}>
                     <ListItemIcon>
                       <LockResetIcon />
                     </ListItemIcon>
@@ -116,7 +155,7 @@ export default function SideBar(props: any) {
                   </ListItemButton>
                 </ListItem>
                 <ListItem key={"Unlock User"} disablePadding onClick={changePage("Unlock User")}>
-                  <ListItemButton selected={subSelect === 1} onClick={() => saveMenu(0, 1)}>
+                  <ListItemButton selected={subSelect === "Unlock User"} onClick={() => saveMenu("User Services", "Unlock User")}>
                     <ListItemIcon>
                       <KeyIcon />
                     </ListItemIcon>
@@ -124,7 +163,7 @@ export default function SideBar(props: any) {
                   </ListItemButton>
                 </ListItem>
                 <ListItem key={"Unlock Policy"} disablePadding onClick={changePage("Unlock Policy")}>
-                  <ListItemButton selected={subSelect === 2} onClick={() => saveMenu(0, 2)}>
+                  <ListItemButton selected={subSelect === "Unlock Policy"} onClick={() => saveMenu("User Services", "Unlock Policy")}>
                     <ListItemIcon>
                       <PolicyIcon />
                     </ListItemIcon>
@@ -133,22 +172,31 @@ export default function SideBar(props: any) {
                 </ListItem>
               </List>
             </Collapse>
+            {/* Reports Menu */}
+            <ListItem key={"Generate Reports"} disablePadding>
+              <ListItemButton selected={mainSelect === "Generate Reports"} onClick={() => saveMenu("Generate Reports", "")}>
+                <ListItemIcon>
+                    <AssessmentIcon fontSize='large'/>  
+                </ListItemIcon>
+                <ListItemText primary={"Generate Reports"} />
+                {mainSelect === "Generate Reports" ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+            </ListItem>
+            <Collapse in={mainSelect === "Generate Reports"? true : false} timeout="auto" unmountOnExit>
+              <List component="div" className='dropdownMenu'>
+                <ListItem key={"On-Hold"} disablePadding onClick={changePage("On-Hold")}>
+                  <ListItemButton selected={subSelect === "On-Hold"} onClick={() => saveMenu("Generate Reports", "On-Hold")}>
+                    <ListItemIcon>
+                      <PauseCircleOutlineIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"On-Hold"}/>
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </Collapse>
         </List>
-        <Typography className='id' variant="overline" 
-          sx={{
-              paddingLeft: '10px',
-              marginBottom: '10%',
-              marginLeft: '10%',
-              bottom: 0,
-              position: 'absolute', 
-              color: 'white'
-          }}>
-            Name:
-            <br></br>
-            Employee Id: {id}
-        </Typography>
         </Drawer>
-        {props.children}
+          {props.children}
     </Box>
-  );
+  )
 }
