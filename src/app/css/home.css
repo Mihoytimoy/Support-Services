@@ -1,7 +1,27 @@
+.homeForm ::-webkit-scrollbar {
+    width: 20px;
+  }
+
+.homeForm ::-webkit-scrollbar-track {
+background-color: transparent;
+}
+
+.homeForm ::-webkit-scrollbar-thumb {
+background-color: #eedca4;
+border-radius: 20px;
+border: 6px solid transparent;
+background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background-color: #EAB959;
+}
+
 .homeContainer {
     background-color: #EAB959;
-    min-height: 550px;
-    max-height: 550px;
+    height: 80vh;
+    min-height: 60vh;
+    max-height: 90vh;
     margin: auto;
     margin-top: 10vh;
     border-radius: 10px;
@@ -9,6 +29,7 @@
     border-width: 0px;
     box-shadow: 2px 2px 5px;
     padding: 0px !important;
+    overflow: auto;
 }
 
 .homeGrid {
@@ -17,18 +38,25 @@
 }
 
 .homeContainer .homeForm {
-    display: block;
+    margin: auto;
+    max-height: 100%;
+    max-width: 90%;
     text-align: center;
-    width: 100%;
-    height: max-content;
-    margin: 4%;
-    padding: 4%;
+    padding: 5%;
     background-color: white;
     border-radius: 15px;
 }
 
+.homeForm form {
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .homeForm .homeFormButton {
+    /* flex-basis: 100%; */
     height: 4em;
+    width: 100%;
     margin-top: 24px;
     margin-bottom: 24px;
     background-color: #EAB959;
@@ -36,14 +64,30 @@
     border: 1px;
     border-style: solid;
     border-color: #EAB959;
-    box-shadow: 0px;
 }
 
 .homeForm .MuiButtonBase-root:hover {
-    background-color: white;
+    background-color: transparent;
     color: #EAB959;
 }
 
 .homeForm .textField:focus{
     border-color: red;
+}
+
+.homeForm .MuiDataGrid-overlayWrapper { 
+    height: 100px
+}
+
+/* set size of button in the footer of the data grid */
+.MuiDataGrid-footerContainer .homeFormButton { 
+    margin: auto 0px auto 20px;
+    width: 100px;
+    height: 2.6em;
+}
+
+.MuiDataGrid-footerContainer .MuiButtonBase-root:hover {
+    background-color: transparent;
+    color: #EAB959;
+    border-color: #EAB959;
 }

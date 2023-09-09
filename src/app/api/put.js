@@ -9,24 +9,25 @@ export function unlockPolicy(data) {
     "/" +
     data.polNo +
     "/unlock";
-  // const config = {
-  //     headers: {
-  //         "Accept": "application/json",
-  //         "userid": data.userId,
-  //         "Content-Type": 'application/json;charset=UTF-8',
-  //         "Access-Control-Allow-Origin": "*"
-  //     }
-  // };
-  // axios.put(policyUrl, config, {
-  //     validateStatus: (status) => {
-  //         return status === 200;
-  //     }
-  // })
-  let instance = axios.create();
-  instance.defaults.headers.common["userid"] = data.userId;
-  instance.put(policyUrl).then((response) => {
-    console.log("Response of logout", response);
-  });
+  const config = {
+      headers: {
+          "Accept": "application/json",
+          "userid": data.userId,
+          "Content-Type": 'application/json;charset=UTF-8',
+          "Access-Control-Allow-Origin": "*"
+      }
+  };
+  axios.defaults.headers.common["userid"] = data.userId;
+  axios.put(policyUrl, config, {
+    validateStatus: (status) => {
+        return status === 200;
+    }
+    }).then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 export function unlockUser(data) {
@@ -37,15 +38,21 @@ export function unlockUser(data) {
     "/unlock";
   const config = {
     headers: {
-      userId: data.userId,
+      userid: data.userId,
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
   };
+  axios.defaults.headers.common["userid"] = data.userId;
 
   axios.put(userUrl, config, {
     validateStatus: (status) => {
       return status === 200;
-    },
+  }
+  }).then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    console.log(error);
   });
 }

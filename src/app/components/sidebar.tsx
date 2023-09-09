@@ -16,11 +16,12 @@ import KeyIcon from '@mui/icons-material/Key';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
-import { Collapse, Typography } from '@mui/material';
+import { Collapse, Typography, Container } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { useAppSelector, useAppDispatch } from "../hooks"; 
 import { mainMenuState, subMenuState } from '../features/support/support-slice';
+import runOnce from "../api/runOnce";
 
 const drawerWidth = 240;
 
@@ -32,22 +33,7 @@ export default function SideBar(props: any) {
   let mainSelect: string = useAppSelector(state => state.support.main);
   let subSelect: string = useAppSelector(state =>state.support.sub);
 
-  
-  const useInit = (initCallback: () => void) => {
-    const [initialized, setInitialized] = React.useState(false);
-    if(!initialized) {
-      initCallback()
-      setInitialized(true);
-    }
-  };
-
-  useInit(() => {
-    setUserId(id);
-  })
-
-  React.useEffect(() => {
-    setUserId(id)
-  }, []);
+  runOnce(() => setUserId(id));
 
   const saveMenu = (main:string, sub:string) => { //code here changes values in the store that concern the menu selections
     if(mainSelect === "") { //check if nothing has been selected yet
@@ -75,19 +61,23 @@ export default function SideBar(props: any) {
   }
 
   return (
-    <Box sx={{ display: 'flex', maxHeight: '550px'}}>
+    <Box sx={{ display: 'flex', height: '100%'}}>
       <CssBaseline />
       <Drawer
         sx={{
+            height: '80vh',
+            minHeight: '60vh',
+            maxHeight: '90vh',
             width: drawerWidth,
             flexShrink: 0,
             '& .MuiDrawer-paper': {
+              height: 1,
               width: drawerWidth,
               boxSizing: 'border-box',
             },
             '& .MuiPaper-root': {
               maxWidth: 1,
-              height: 1,
+              height: 'inherit',
               position: 'relative',
               top: 'auto',
               left: 'auto',
@@ -98,7 +88,7 @@ export default function SideBar(props: any) {
             },
             '& .MuiDrawer-paperAnchorLeft': {
               maxWidth: 1,
-              height: '550px',
+              height: 'inherit',
               borderRadius: '10px 0px 0px 10px',
               position: 'absolute',
               top: 'auto',
@@ -196,7 +186,9 @@ export default function SideBar(props: any) {
             </Collapse>
         </List>
         </Drawer>
+        <Box className='centerChildren'>
           {props.children}
+        </Box>
     </Box>
   )
 }
