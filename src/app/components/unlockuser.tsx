@@ -34,7 +34,7 @@ export default function UnlockUser() {
         component="form"
         onSubmit={handleSubmit(handleRegistration)}
         noValidate
-        sx={{ mt: 1 }}
+        sx={{ mt: 1, display: "grid"  }}
       >
         <Controller
           control={control}
@@ -51,7 +51,6 @@ export default function UnlockUser() {
               onBlur={field.onBlur}
               value={field.value}
               margin="normal"
-              fullWidth
               id="empId"
               label="Employee ID"
               name="empId"
@@ -66,7 +65,6 @@ export default function UnlockUser() {
         <Button
           className="homeFormButton"
           type="submit"
-          fullWidth
           variant="contained"
         >
           Submit

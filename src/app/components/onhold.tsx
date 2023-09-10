@@ -27,20 +27,20 @@ export default function OnHold() {
   };
 
   return (
-    <Box className="homeForm">
-      <Typography
-        component="h1"
-        variant="overline"
-        sx={{ color: "#EAB959", fontSize: 15, textAlign: "left" }}
-      >
-        Generate by No. of Results
-      </Typography>
+    <Box className="homeForm" sx={{paddingTop: "0% !important"}}>
       <Box
+        className="stickySearch"
         component="form"
         onSubmit={handleSubmit(handleRegistration)}
         noValidate
-        sx={{ height: "fit-content", display: "flex" }}
       >
+      <Typography
+        component="h1"
+        variant="overline"
+        sx={{ color: "#EAB959", fontSize: 15, textAlign: "left", flexBasis: "100%" }}
+      >
+        Generate by No. of Results
+      </Typography>
         <TextField
           {...register("firstResult", {
             required: "Required",
@@ -79,7 +79,7 @@ export default function OnHold() {
           sx={{ marginLeft: "15px", marginTop: "8px" }}
           type="submit"
         >
-          <SearchIcon fontSize="medium" />
+          <SearchIcon sx={{fontSize: "1em"}}/>
         </IconButton>
       </Box>
       <br />

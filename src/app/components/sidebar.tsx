@@ -21,19 +21,16 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { useAppSelector, useAppDispatch } from "../hooks"; 
 import { mainMenuState, subMenuState } from '../features/support/support-slice';
-import runOnce from "../api/runOnce";
 
 const drawerWidth = 240;
 
 export default function SideBar(props: any) {
-  const [userId, setUserId] = React.useState("");
   const router = useRouter();
   const dispatch = useAppDispatch();
   const id: string = useAppSelector((state) => state.support.id);
+  const name: string = useAppSelector((state) => state.support.name);
   let mainSelect: string = useAppSelector(state => state.support.main);
   let subSelect: string = useAppSelector(state =>state.support.sub);
-
-  runOnce(() => setUserId(id));
 
   const saveMenu = (main:string, sub:string) => { //code here changes values in the store that concern the menu selections
     if(mainSelect === "") { //check if nothing has been selected yet
@@ -108,9 +105,9 @@ export default function SideBar(props: any) {
             <Box component='div' sx={{display: 'flex', alignItems: 'center'}}>
               <AccountCircleIcon fontSize='large'/>
               <Typography className="userInfo">
-                Timothy Mendoza 
+                Name: {name} 
                 <br/>
-                ID: {userId}
+                ID: {id}
               </Typography>
             </Box>
         </Box>

@@ -11,7 +11,7 @@ export async function resetPWD(data) {
     headers: {
       userId: data.userId,
       "Content-Type": "application/json",
-      "Accept": "application/json"
+      Accept: "application/json",
     },
   };
 
@@ -29,7 +29,8 @@ export async function resetPWD(data) {
     });
 }
 
-export async function getOnHold(data, {setRows}) {
+export async function getOnHold(data, { setRows }) {
+  data.firstResult;
   const onHoldUrl =
     "https://gymp3t84o3.execute-api.ap-southeast-1.amazonaws.com/dev1/report/onhold-hold/list" +
     "?firstResult=" +
@@ -37,14 +38,14 @@ export async function getOnHold(data, {setRows}) {
     "&maxResult=" +
     data.maxResult;
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-    };
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  };
 
-    await axios
+  await axios
     .get(onHoldUrl, config, {
       validateStatus: (status) => {
         return status === 200;
@@ -59,21 +60,21 @@ export async function getOnHold(data, {setRows}) {
     });
 }
 
-export async function getLogin(data, {getLoginInfo}) {
+export async function getLogin(data, { setLoginInfo }) {
+  const token = btoa(data.id) + "|" +  btoa(data.password);
   const loginUrl =
     "https://gymp3t84o3.execute-api.ap-southeast-1.amazonaws.com/dev1/emp/auth?token=" +
-    data.userId +
-    "|" +
-    data.userPassword;
+    token;
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-    };
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  };
+  // axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 
-    await axios
+  await axios
     .get(loginUrl, config, {
       validateStatus: (status) => {
         return status === 200;
@@ -81,10 +82,9 @@ export async function getLogin(data, {getLoginInfo}) {
     })
     .then((response) => {
       console.log(response);
-      getLoginInfo(response);
+      setLoginInfo(response);
     })
     .catch((error) => {
       console.log(error);
     });
-
 }

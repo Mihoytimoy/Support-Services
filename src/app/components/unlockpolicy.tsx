@@ -38,7 +38,7 @@ export default function UnlockPolicy() {
         component="form"
         onSubmit={handleSubmit(handleRegistration)}
         noValidate
-        sx={{ mt: 1 }}
+        sx={{ mt: 1, display: "grid" }}
       >
         <Controller
           control={control}
@@ -55,7 +55,6 @@ export default function UnlockPolicy() {
               onBlur={field.onBlur}
               value={field.value}
               margin="normal"
-              fullWidth
               id="branchCode"
               label="Branch Code"
               name="branchCode"
@@ -82,7 +81,6 @@ export default function UnlockPolicy() {
               onBlur={field.onBlur}
               value={field.value}
               margin="normal"
-              fullWidth
               id="prodCode"
               label="Prod Code"
               name="prodCode"
@@ -109,7 +107,6 @@ export default function UnlockPolicy() {
               onBlur={field.onBlur}
               value={field.value}
               margin="normal"
-              fullWidth
               id="polNo"
               label="Policy No"
               name="polNo"
@@ -123,7 +120,6 @@ export default function UnlockPolicy() {
         <Button
           className="homeFormButton"
           type="submit"
-          fullWidth
           variant="contained"
         >
           Submit

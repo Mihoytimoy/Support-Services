@@ -28,7 +28,7 @@ export default function Reset() {
             <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 25}}>
                 Reset Password
             </Typography>
-            <Box component="form" onSubmit={handleSubmit(handleRegistration)} noValidate sx={{ mt: 1 }}>
+            <Box component="form" onSubmit={handleSubmit(handleRegistration)} noValidate sx={{ mt: 1, display: "grid"  }}>
                 <Controller
                     control={control}
                     name="empId"
@@ -44,7 +44,6 @@ export default function Reset() {
                         onBlur={field.onBlur}
                         value={field.value}
                         margin="normal"
-                        fullWidth
                         id="empId"
                         label="Employee ID"
                         name="empId"
@@ -71,7 +70,6 @@ export default function Reset() {
                         onBlur={field.onBlur}
                         value={field.value}
                         margin="normal"
-                        fullWidth
                         id="tempPassword"
                         label="Temporary Password"
                         name="tempPassword"

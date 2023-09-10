@@ -1,7 +1,7 @@
 .outerBox {
     max-width: 550px;
     box-sizing: border-box;
-    padding: 10% 0% 10% 0%;
+    padding: 5% 0% 5% 0%;
     /* border-color: #EAB959; */
     border-style: hidden;
     border-radius: 20px;
@@ -14,8 +14,3 @@
     align-items: center;
 }
 
-.MuiTextField-root > *{
-    border-width: 0px;
-    border-style: solid;
-    border-radius: 20px;
-}

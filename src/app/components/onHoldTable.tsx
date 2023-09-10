@@ -73,52 +73,52 @@ const columns: GridColDef[] = [
   { field: "requestedBy", headerName: "Requested By", width: 110 },
 ];
 
-function unHold(data:any) {
+function unHold(data: any) {
   updateStatus(data);
-  if(true) {
-    // setRows
-  }
 }
 
-function CustomFooterComponent(
-  props: NonNullable<GridSlotsComponentsProps["footer"]>
-) {
+function CustomFooterComponent(props: any) {
   const apiRef = useGridApiContext();
   const homeFormButton = "homeFormButton";
   let selectedSize = apiRef.current.getSelectedRows().size;
 
   return (
     <GridFooterContainer>
-      <Button className={selectedSize !== 0 ? homeFormButton : ""} sx={{marginLeft: '20px'}} 
+      <Button
+        className={selectedSize !== 0 ? homeFormButton : ""}
+        sx={{ marginLeft: "20px" }}
         onClick={() => {
-         unHold(apiRef.current.getSelectedRows().keys())
+          unHold(apiRef.current.getSelectedRows().keys());
         }}
         variant="outlined"
         disabled={selectedSize === 0}
-        >
+      >
         Confirm
       </Button>
-      <GridPagination sx={{width: '50%'}}/>
+      <GridPagination sx={{ width: "50%" }} />
     </GridFooterContainer>
   );
 }
 
-export default function OnHoldTable({values, setRows}: any) {
+export default function OnHoldTable({ values, setRows }: any) {
   const rows = createDataLoop(values);
   return (
-    <Box component='div' sx={{ height: "inherit", width: "auto", maxWidth: "100%" }}>
+    <Box
+      component="div"
+      sx={{ height: "inherit", width: "auto", maxWidth: "100%" }}
+    >
       <DataGrid
         className="reportTable"
         getRowId={(row: any) => row.requestNo}
         rows={rows}
         columns={columns}
-      slots={{ footer: CustomFooterComponent }}
+        slots={{ footer: CustomFooterComponent }}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
+            paginationModel: { page: 0, pageSize: 10 },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[5, 10]}
         checkboxSelection
       />
     </Box>

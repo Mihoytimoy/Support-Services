@@ -1,12 +1,12 @@
-.homeForm ::-webkit-scrollbar {
+.centerChildren > ::-webkit-scrollbar {
     width: 20px;
   }
 
-.homeForm ::-webkit-scrollbar-track {
+  .centerChildren > ::-webkit-scrollbar-track {
 background-color: transparent;
 }
 
-.homeForm ::-webkit-scrollbar-thumb {
+.centerChildren > ::-webkit-scrollbar-thumb {
 background-color: #eedca4;
 border-radius: 20px;
 border: 6px solid transparent;
@@ -39,18 +39,28 @@ background-color: #EAB959;
 
 .homeContainer .homeForm {
     margin: auto;
+    display: block;
     max-height: 100%;
+    min-width: 50%;
     max-width: 90%;
     text-align: center;
     padding: 5%;
     background-color: white;
     border-radius: 15px;
+    overflow-y: auto;
 }
 
-.homeForm form {
+.homeForm .stickySearch {
     height: auto;
     display: flex;
     flex-wrap: wrap;
+    position: sticky;
+    top: 0px;
+    padding-top: 2.5%;
+    background-color: white;
+    border-bottom: 2px #EAB959;
+    border-bottom-style: solid;
+    z-index: 99;
 }
 
 .homeForm .homeFormButton {
