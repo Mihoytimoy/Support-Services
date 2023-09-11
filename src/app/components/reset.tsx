@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, IconButton, Snackbar, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { resetPWD } from "../api/get";
 
@@ -28,7 +28,6 @@ export default function Reset() {
     if(status === 200) {
         setMessage("Password Reset Successful!");
         setAlertOpen(true);
-        reset();
     }else if(status >= 400 || status === undefined) {
         setAlertOpen(true);
         setMessage("Password Reset Unsuccessful!");
@@ -39,6 +38,7 @@ export default function Reset() {
         console.log(data);
         resetPWD(data, setStatus);
         setStatus(0); //I need this to re-initialize status so that the next successfull status can trigger the useeffect
+        reset();
       }
 
     return (

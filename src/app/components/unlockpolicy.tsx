@@ -27,7 +27,6 @@ export default function UnlockPolicy() {
     if(status === 200) {
       setMessage("Unlock Policy Successful!");
       setAlertOpen(true);
-      reset();
     }else if(status >= 400 || status === undefined) {
       setAlertOpen(true);
       setMessage("Unlock Policy Unsuccessful!");

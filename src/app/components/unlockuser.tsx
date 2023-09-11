@@ -24,7 +24,6 @@ export default function UnlockUser() {
     if(status === 200) {
       setMessage("Unlock User Successful!");
       setAlertOpen(true);
-      reset();
     }else if(status >= 400 || status === undefined) {
       setAlertOpen(true);
       setMessage("Unlock User Unsuccessful!");

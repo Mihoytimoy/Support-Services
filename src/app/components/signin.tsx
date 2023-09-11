@@ -15,7 +15,6 @@ import { IconButton, InputAdornment } from "@mui/material";
 
 import "../css/signin.css";
 import { useForm } from "react-hook-form";
-import runOnce from "../api/runOnce";
 import { getLogin } from "../api/get";
 
 export default function SignIn() {
@@ -36,17 +35,21 @@ export default function SignIn() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  runOnce(() => {
+  const [runOnce, setRunOnce] = React.useState(true);
+  if(runOnce === true) {
     dispatch(reset());
-  });
+    setRunOnce(false);
+  }
 
   const handleRegistration = (data: any) => {
     console.log(data);
     getLogin(data, { setLoginInfo });
     console.log(loginInfo);
-    if (loginInfo !== undefined) {
+    // if (loginInfo !== undefined) {
+    if (data !== undefined) {
       // dispatch(saveId(loginInfo.id.toString()));
       // dispatch(saveName(loginInfo.password.toString()));
+      dispatch(saveId(data.id));
     }
     router.push("/home");
   };
