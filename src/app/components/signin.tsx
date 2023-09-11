@@ -45,8 +45,8 @@ export default function SignIn() {
     getLogin(data, { setLoginInfo });
     console.log(loginInfo);
     if (loginInfo !== undefined) {
-      dispatch(saveId(loginInfo.id.toString()));
-      dispatch(saveName(loginInfo.password.toString()));
+      // dispatch(saveId(loginInfo.id.toString()));
+      // dispatch(saveName(loginInfo.password.toString()));
     }
     router.push("/home");
   };
