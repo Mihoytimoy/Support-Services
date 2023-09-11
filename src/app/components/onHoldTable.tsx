@@ -2,11 +2,13 @@ import * as React from "react";
 import { updateStatus } from "../api/post";
 import {
   DataGrid,
+  GRID_CHECKBOX_SELECTION_COL_DEF,
   GridColDef,
   GridFooterContainer,
   GridPagination,
   GridSlotsComponentsProps,
   useGridApiContext,
+  GridRow,
 } from "@mui/x-data-grid";
 import { Box, Button } from "@mui/material";
 
@@ -73,8 +75,9 @@ const columns: GridColDef[] = [
   { field: "requestedBy", headerName: "Requested By", width: 110 },
 ];
 
-function unHold(data: any) {
+function unHold(data: any, setRows: any) {
   updateStatus(data);
+  setRows(null);
 }
 
 function CustomFooterComponent(props: any) {
@@ -88,7 +91,7 @@ function CustomFooterComponent(props: any) {
         className={selectedSize !== 0 ? homeFormButton : ""}
         sx={{ marginLeft: "20px" }}
         onClick={() => {
-          unHold(apiRef.current.getSelectedRows().keys());
+          unHold(apiRef.current.getSelectedRows().keys(), { ...props });
         }}
         variant="outlined"
         disabled={selectedSize === 0}
@@ -100,8 +103,14 @@ function CustomFooterComponent(props: any) {
   );
 }
 
+declare module "@mui/x-data-grid" {
+  interface FooterPropsOverrides {
+    setRows: Function;
+  }
+}
 export default function OnHoldTable({ values, setRows }: any) {
   const rows = createDataLoop(values);
+
   return (
     <Box
       component="div"
@@ -113,6 +122,9 @@ export default function OnHoldTable({ values, setRows }: any) {
         rows={rows}
         columns={columns}
         slots={{ footer: CustomFooterComponent }}
+        slotProps={{
+          footer: { setRows: setRows },
+        }}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 10 },

@@ -6,8 +6,12 @@ import { useAppSelector } from "../hooks";
 
 import "../css/home.css";
 import React from "react";
+import SuccessAlert from "./successAlert";
 
 export default function UnlockPolicy() {
+  const [alertOpen, setAlertOpen] = React.useState(false);
+  const [status, setStatus] = React.useState(0);
+  const [message, setMessage] = React.useState("");
   const id: string = useAppSelector((state) => state.support.id);
   const { handleSubmit, control, reset } = useForm({
     defaultValues: {
@@ -19,18 +23,31 @@ export default function UnlockPolicy() {
     mode: "onChange"
   });
 
+  React.useEffect(() => {
+    if(status === 200) {
+      setMessage("Unlock Policy Successful!");
+      setAlertOpen(true);
+      reset();
+    }else if(status >= 400 || status === undefined) {
+      setAlertOpen(true);
+      setMessage("Unlock Policy Unsuccessful!");
+  }
+    }, [status]);
+    
   const handleRegistration = (data: any) => {
     console.log(data);
-    unlockPolicy(data);
+    unlockPolicy(data, setStatus);
     reset();
+    setStatus(0); //I need this to re-initialize status so that the next successfull status can trigger the useeffect
   };
 
   return (
     <Box className="homeForm">
+      <SuccessAlert status={status} alertOpen={alertOpen} setAlertOpen={setAlertOpen} message={message}/>
       <Typography
         component="h1"
         variant="overline"
-        sx={{ color: "#EAB959", fontSize: 25 }}
+        sx={{ color: "#EAB959", fontSize: 25, fontWeight: "bold" }}
       >
         Unlock Policy
       </Typography>

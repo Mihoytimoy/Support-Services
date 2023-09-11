@@ -25,22 +25,26 @@ export default function OnHold() {
     console.log(data);
     getOnHold(data, { setRows });
   };
-
   return (
-    <Box className="homeForm" sx={{paddingTop: "0% !important"}}>
+    <Box className="homeForm" sx={{ paddingTop: "0% !important" }}>
       <Box
         className="stickySearch"
         component="form"
         onSubmit={handleSubmit(handleRegistration)}
         noValidate
       >
-      <Typography
-        component="h1"
-        variant="overline"
-        sx={{ color: "#EAB959", fontSize: 15, textAlign: "left", flexBasis: "100%" }}
-      >
-        Generate by No. of Results
-      </Typography>
+        <Typography
+          component="h1"
+          variant="overline"
+          sx={{
+            color: "#EAB959",
+            fontSize: 15,
+            textAlign: "left",
+            flexBasis: "100%",
+          }}
+        >
+          Generate by No. of Results
+        </Typography>
         <TextField
           {...register("firstResult", {
             required: "Required",
@@ -76,20 +80,34 @@ export default function OnHold() {
         />
         <IconButton
           size="large"
-          sx={{ marginLeft: "15px", marginTop: "8px" }}
+          sx={{
+            marginLeft: "10px",
+            alignSelf: "center",
+            height: "1.25em",
+            width: "10%",
+            backgroundColor: "#EAB959",
+            borderRadius: "10px",
+            border: "2px #EAB959",
+            borderStyle: "solid",
+          }}
           type="submit"
         >
-          <SearchIcon sx={{fontSize: "1em"}}/>
+          <SearchIcon sx={{ color: "white", fontSize: "1em" }} />
         </IconButton>
+        <Typography
+          component="h1"
+          variant="overline"
+          sx={{
+            color: "#EAB959",
+            fontSize: 25,
+            fontWeight: "bold",
+            margin: "auto",
+          }}
+        >
+          On Hold Requests
+        </Typography>
       </Box>
       <br />
-      <Typography
-        component="h1"
-        variant="overline"
-        sx={{ color: "#EAB959", fontSize: 25 }}
-      >
-        On Hold Requests
-      </Typography>
       <OnHoldTable values={rows} setRows={() => setRows} />
     </Box>
   );

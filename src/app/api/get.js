@@ -1,5 +1,5 @@
 const axios = require("axios");
-export async function resetPWD(data) {
+export async function resetPWD(data, setStatus) {
   const resetUrl =
     "https://gymp3t84o3.execute-api.ap-southeast-1.amazonaws.com/dev1/support/resetpwd" +
     "/" +
@@ -23,9 +23,11 @@ export async function resetPWD(data) {
     })
     .then((response) => {
       console.log(response);
+      setStatus(response.status)
     })
     .catch((error) => {
       console.log(error);
+      setStatus(error.status);
     });
 }
 

@@ -52,7 +52,7 @@
     color: white !important;
 }
 
-.MuiSvgIcon-root { /*Sets user icon to this color*/
+.MuiDrawer-root .MuiSvgIcon-root { /*Sets user icon to this color*/
     color: #EAB959;
 }
 
@@ -60,7 +60,7 @@
     color: white;
 }
 
-.MuiListItemButton-root:hover  .MuiSvgIcon-root { /*change color of icon on hover*/
+.MuiListItemButton-root:hover .MuiSvgIcon-root { /*change color of icon on hover*/
     color: white;
 }
 

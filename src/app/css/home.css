@@ -1,12 +1,12 @@
-.centerChildren > ::-webkit-scrollbar {
+.centerChildren ::-webkit-scrollbar {
     width: 20px;
   }
 
-  .centerChildren > ::-webkit-scrollbar-track {
+.centerChildren ::-webkit-scrollbar-track {
 background-color: transparent;
 }
 
-.centerChildren > ::-webkit-scrollbar-thumb {
+.centerChildren ::-webkit-scrollbar-thumb {
 background-color: #eedca4;
 border-radius: 20px;
 border: 6px solid transparent;
@@ -96,8 +96,18 @@ background-color: #EAB959;
     height: 2.6em;
 }
 
-.MuiDataGrid-footerContainer .MuiButtonBase-root:hover {
+.MuiDataGrid-footerContainer .MuiButtonBase-root:hover{
     background-color: transparent;
     color: #EAB959;
     border-color: #EAB959;
 }
+
+.stickySearch .MuiButtonBase-root:hover .MuiSvgIcon-root {
+    color: #EAB959;
+}
+
+.MuiDataGrid-main .MuiDataGrid-columnHeaders {
+    top: 0;
+    position: sticky;
+}
+

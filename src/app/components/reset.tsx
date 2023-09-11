@@ -1,13 +1,19 @@
 "use client";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, IconButton, Snackbar, TextField, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { resetPWD } from "../api/get";
 
 import "../css/home.css";
 import { useAppSelector } from "../hooks";
+import React from "react";
+import SuccessAlert from "./successAlert";
 
 export default function Reset() {
     const id: string = useAppSelector((state) => state.support.id);
+    const [alertOpen, setAlertOpen] = React.useState(false);
+    const [status, setStatus] = React.useState(0);
+    const [message, setMessage] = React.useState("");
+
     const { handleSubmit, control, reset } = useForm({
         defaultValues: {
           empId: "",
@@ -17,15 +23,28 @@ export default function Reset() {
         mode: 'onChange',
       });
 
+    React.useEffect(() => {
+        console.log(status);
+    if(status === 200) {
+        setMessage("Password Reset Successful!");
+        setAlertOpen(true);
+        reset();
+    }else if(status >= 400 || status === undefined) {
+        setAlertOpen(true);
+        setMessage("Password Reset Unsuccessful!");
+    }
+    }, [status]);
+
     const handleRegistration = (data: any) => {
         console.log(data);
-        resetPWD(data);
-        reset();
+        resetPWD(data, setStatus);
+        setStatus(0); //I need this to re-initialize status so that the next successfull status can trigger the useeffect
       }
 
     return (
         <Box className="homeForm">
-            <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 25}}>
+        <SuccessAlert status={status} alertOpen={alertOpen} setAlertOpen={setAlertOpen} message={message}/>
+            <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 25, fontWeight: "bold"}}>
                 Reset Password
             </Typography>
             <Box component="form" onSubmit={handleSubmit(handleRegistration)} noValidate sx={{ mt: 1, display: "grid"  }}>
@@ -79,7 +98,7 @@ export default function Reset() {
                         }
                         />
                     )}
-                />   
+                />
                 <Button
                     className="homeFormButton"
                     type="submit"
