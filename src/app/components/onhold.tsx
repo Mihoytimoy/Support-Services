@@ -122,7 +122,6 @@ export default function OnHold() {
       </Box>
       <br />
       <OnHoldTable
-        handleRegistration={() => handleRegistration}
         values={rows}
         setRows={() => setRows}
         getOnHold={() => getOnHold}

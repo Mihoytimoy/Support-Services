@@ -6,9 +6,12 @@ import {
   GridColDef,
   GridFooterContainer,
   GridPagination,
+  gridPageCountSelector,
   useGridApiContext,
+  useGridSelector,
 } from "@mui/x-data-grid";
-import { Box, Button } from "@mui/material";
+import { Box, Button, TablePaginationProps } from "@mui/material";
+import MuiPagination from "@mui/material/Pagination";
 
 interface OnHoldReq {
   requestNo: number;
@@ -73,8 +76,36 @@ const columns: GridColDef[] = [
   { field: "requestedBy", headerName: "Requested By", width: 130 },
 ];
 
-function unHold(data: any, { handleRegistration, setRows, firstResult, maxResult }: any) {
-  updateStatus(data, firstResult, maxResult, {setRows});
+function unHold(
+  data: any,
+  { setRows, firstResult, maxResult }: any
+) {
+  updateStatus(data, firstResult, maxResult, { setRows });
+}
+
+function Pagination({
+  page,
+  onPageChange,
+  className,
+}: Pick<TablePaginationProps, "page" | "onPageChange" | "className">) {
+  const apiRef = useGridApiContext();
+  const pageCount = useGridSelector(apiRef, gridPageCountSelector);
+
+  return (
+    <MuiPagination
+      color="primary"
+      className={className}
+      count={pageCount}
+      page={page + 1}
+      onChange={(event, newPage) => {
+        onPageChange(event as any, newPage - 1);
+      }}
+    />
+  );
+}
+
+function CustomPagination(props: any) {
+  return <GridPagination ActionsComponent={Pagination} {...props} />;
 }
 
 function CustomFooterComponent(props: any) {
@@ -95,14 +126,13 @@ function CustomFooterComponent(props: any) {
       >
         Confirm
       </Button>
-      <GridPagination sx={{ width: "50%" }} />
+      <CustomPagination sx={{ width: "75%" }} />
     </GridFooterContainer>
   );
 }
 
 declare module "@mui/x-data-grid" {
   interface FooterPropsOverrides {
-    handleRegistration: Function;
     setRows: Function;
     firstResult: string;
     maxResult: string;
@@ -111,7 +141,6 @@ declare module "@mui/x-data-grid" {
 
 export default function OnHoldTable({
   values,
-  handleRegistration,
   setRows,
   firstResult,
   maxResult,
@@ -135,20 +164,21 @@ export default function OnHoldTable({
         slots={{ footer: CustomFooterComponent }}
         slotProps={{
           footer: {
-            handleRegistration: handleRegistration(),
             setRows: setRows(),
             firstResult: firstResult,
             maxResult: maxResult,
           },
         }}
+        pagination
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 10 },
+            paginationModel: { pageSize: 5 },
           },
         }}
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection
         disableRowSelectionOnClick
+        hideFooterSelectedRowCount
       />
     </Box>
   );
