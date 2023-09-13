@@ -8,7 +8,7 @@ import "../css/home.css";
 export default function Home(props: any) {
     return ( 
         <Provider store={store}>
-            <Container maxWidth="lg" className="homeContainer">
+            <Container maxWidth="xl" className="homeContainer">
                 <SideBar>
                     {props.children}
                 </SideBar>

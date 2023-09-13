@@ -1,14 +1,16 @@
+import { getOnHold } from "../api/get";
+
 const axios = require("axios");
 
-export function updateStatus(data) {
-    let body = {};
+export async function updateStatus(data, firstResult, maxResult, {setRows}) {
+    let body = [];
     let iterator = data.next();
     do {
-        body[iterator.value] = {"requestNo": iterator.value};
+        body.push({"requestNo": iterator.value});
         iterator = data.next();
     }while(iterator.done === false)
-    const list = [body];
-
+    const list = body;
+   
     const updateStatusUrl =
       "https://gymp3t84o3.execute-api.ap-southeast-1.amazonaws.com/dev1/report/update/status";
 
@@ -20,13 +22,14 @@ export function updateStatus(data) {
         list
       };
   
-      axios.post(updateStatusUrl, config, {
+      await axios.post(updateStatusUrl, config, {
         validateStatus: (status) => {
           return status === 200;
         },
       })
       .then((response) => {
         console.log(response);
+        getOnHold({firstResult, maxResult}, {setRows})
       })
       .catch((error) => {
         console.log(error);

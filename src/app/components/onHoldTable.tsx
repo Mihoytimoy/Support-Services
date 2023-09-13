@@ -1,14 +1,12 @@
 import * as React from "react";
 import { updateStatus } from "../api/post";
+import { getOnHold } from "../api/get";
 import {
   DataGrid,
-  GRID_CHECKBOX_SELECTION_COL_DEF,
   GridColDef,
   GridFooterContainer,
   GridPagination,
-  GridSlotsComponentsProps,
   useGridApiContext,
-  GridRow,
 } from "@mui/x-data-grid";
 import { Box, Button } from "@mui/material";
 
@@ -66,18 +64,17 @@ function createDataLoop(values: any) {
 }
 
 const columns: GridColDef[] = [
-  { field: "requestNo", headerName: "Request No.", width: 110 },
-  { field: "reportName", headerName: "Report Name", width: 120 },
-  { field: "branch", headerName: "Branch", width: 80 },
-  { field: "dateFrom", headerName: "Date From", width: 100 },
-  { field: "dateTo", headerName: "Date To", width: 90 },
-  { field: "dateRequested", headerName: "Date Requested", width: 140 },
-  { field: "requestedBy", headerName: "Requested By", width: 110 },
+  { field: "requestNo", headerName: "Request No.", width: 130 },
+  { field: "reportName", headerName: "Report Name", width: 140 },
+  { field: "branch", headerName: "Branch", width: 100 },
+  { field: "dateFrom", headerName: "Date From", width: 150 },
+  { field: "dateTo", headerName: "Date To", width: 150 },
+  { field: "dateRequested", headerName: "Date Requested", width: 160 },
+  { field: "requestedBy", headerName: "Requested By", width: 130 },
 ];
 
-function unHold(data: any, setRows: any) {
-  updateStatus(data);
-  setRows(null);
+function unHold(data: any, { handleRegistration, setRows, firstResult, maxResult }: any) {
+  updateStatus(data, firstResult, maxResult, {setRows});
 }
 
 function CustomFooterComponent(props: any) {
@@ -105,11 +102,25 @@ function CustomFooterComponent(props: any) {
 
 declare module "@mui/x-data-grid" {
   interface FooterPropsOverrides {
+    handleRegistration: Function;
     setRows: Function;
+    firstResult: string;
+    maxResult: string;
   }
 }
-export default function OnHoldTable({ values, setRows }: any) {
-  const rows = createDataLoop(values);
+
+export default function OnHoldTable({
+  values,
+  handleRegistration,
+  setRows,
+  firstResult,
+  maxResult,
+}: any) {
+  const [tableData, setTableData] = React.useState(Array());
+
+  React.useEffect(() => {
+    setTableData(createDataLoop(values));
+  }, [values]);
 
   return (
     <Box
@@ -119,19 +130,25 @@ export default function OnHoldTable({ values, setRows }: any) {
       <DataGrid
         className="reportTable"
         getRowId={(row: any) => row.requestNo}
-        rows={rows}
+        rows={tableData}
         columns={columns}
         slots={{ footer: CustomFooterComponent }}
         slotProps={{
-          footer: { setRows: setRows },
+          footer: {
+            handleRegistration: handleRegistration(),
+            setRows: setRows(),
+            firstResult: firstResult,
+            maxResult: maxResult,
+          },
         }}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 10 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[5, 10, 20]}
         checkboxSelection
+        disableRowSelectionOnClick
       />
     </Box>
   );

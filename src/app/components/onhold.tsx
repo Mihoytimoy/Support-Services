@@ -6,25 +6,38 @@ import "../css/home.css";
 import { Box, IconButton, TextField, Typography } from "@mui/material";
 import React from "react";
 import OnHoldTable from "./onHoldTable";
+import { setMaxIdleHTTPParsers } from "http";
 
 export default function OnHold() {
   const [rows, setRows] = React.useState();
+  const [firstResult, setFirstResult] = React.useState("");
+  const [maxResult, setMaxResult] = React.useState("");
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      firstResult: null,
-      maxResult: null,
+      firstResult: 1,
+      maxResult: 5,
     },
     mode: "onChange",
   });
 
+  
   const handleRegistration = (data: any) => {
     console.log(data);
+    setFirstResult(data.firstResult);
+    setMaxResult(data.maxResult);
     getOnHold(data, { setRows });
   };
+
+  const runOnce = true;
+  React.useEffect(() => {
+    handleRegistration({ firstResult: 1, maxResult: 5 });
+  }, [runOnce]);
+
+  
   return (
     <Box className="homeForm" sx={{ paddingTop: "0% !important" }}>
       <Box
@@ -56,7 +69,7 @@ export default function OnHold() {
           variant="standard"
           sx={{ m: 0, width: "15%", height: "10px" }}
           id="firstResult"
-          label="First Result"
+          label="Page Number"
           name="firstResult"
           autoFocus
           error={errors.firstResult?.message !== undefined ? true : false}
@@ -108,7 +121,14 @@ export default function OnHold() {
         </Typography>
       </Box>
       <br />
-      <OnHoldTable values={rows} setRows={() => setRows} />
+      <OnHoldTable
+        handleRegistration={() => handleRegistration}
+        values={rows}
+        setRows={() => setRows}
+        getOnHold={() => getOnHold}
+        firstResult={firstResult}
+        maxResult={maxResult}
+      />
     </Box>
   );
 }

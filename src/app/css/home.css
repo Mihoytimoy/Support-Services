@@ -111,3 +111,25 @@ background-color: #EAB959;
     position: sticky;
 }
 
+.MuiDataGrid-main .MuiDataGrid-columnHeader:focus-within {
+    outline: 0px !important;
+}
+
+.MuiDataGrid-cell:focus-within {
+    /* outline: solid gray 1px !important; */
+    outline: solid gray 0px !important;
+    /* outline-offset: -1px !important; */
+}
+
+.MuiDataGrid-columnHeaders .MuiCheckbox-indeterminate {
+    color: #EAB959 !important;
+}
+
+.MuiDataGrid-main .Mui-checked {
+    color: #EAB959;
+}
+
+.MuiDataGrid-columnHeaderTitleContainerContent .MuiButtonBase-root:hover {
+    color: #EAB959;
+}
+

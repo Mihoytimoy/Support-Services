@@ -16,7 +16,8 @@ import KeyIcon from '@mui/icons-material/Key';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
-import { Collapse, Typography, Container } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { Collapse, Typography, Container, IconButton } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { useAppSelector, useAppDispatch } from "../hooks"; 
@@ -26,20 +27,24 @@ const drawerWidth = 240;
 
 export default function SideBar(props: any) {
   const router = useRouter();
+  const [id, setId] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [mainSelect, setMainSelect] = React.useState("");
+  const [subSelect, setSubSelect] = React.useState("");
   const dispatch = useAppDispatch();
-  const id: string = useAppSelector((state) => state.support.id);
-  const name: string = useAppSelector((state) => state.support.name);
-  let mainSelect: string = useAppSelector(state => state.support.main);
-  let subSelect: string = useAppSelector(state =>state.support.sub);
+  const tempId: string = useAppSelector((state) => state.support.id);
+  const tempName: string = useAppSelector((state) => state.support.name);
+  let tempMainSelect: string = useAppSelector(state => state.support.main);
+  let tempSubSelect: string = useAppSelector(state =>state.support.sub);
 
   const saveMenu = (main:string, sub:string) => { //code here changes values in the store that concern the menu selections
-    if(mainSelect === "") { //check if nothing has been selected yet
+    if(tempMainSelect === "") { //check if nothing has been selected yet
       dispatch(mainMenuState(main));
-    }else if(mainSelect === main && sub === "") { //closing the menu by clicking same menu again
+    }else if(tempMainSelect === main && sub === "") { //closing the menu by clicking same menu again
       dispatch(mainMenuState(""));
-    }else if(mainSelect !== "" && sub === "") { //changing menu selections
+    }else if(tempMainSelect !== "" && sub === "") { //changing menu selections
       dispatch(mainMenuState(main));
-    }else if(mainSelect !== "" && sub !== "") { //changing submenu selections
+    }else if(tempMainSelect !== "" && sub !== "") { //changing submenu selections
       dispatch(subMenuState(sub));
     };
   }
@@ -56,6 +61,20 @@ export default function SideBar(props: any) {
       break;
     }
   }
+
+  function logout() {
+    router.push('/');
+  }
+
+  React.useEffect(() => {
+    setId(tempId);
+    setName(tempName);
+  }, [tempId, tempName]);
+
+  React.useEffect(() => {
+    setMainSelect(tempMainSelect);
+    setSubSelect(tempSubSelect);
+  }, [tempMainSelect, tempSubSelect])
 
   return (
     <Box sx={{ display: 'flex', height: '100%'}}>
@@ -95,12 +114,12 @@ export default function SideBar(props: any) {
           variant="permanent"
           anchor="left"
       >
-          <Box component="img" 
-            sx={{margin: '10px auto 0px auto',
-                 width: .8, 
-                 height: 'fit-content',
-                }}
-            src='\resources\standardinsurancelogo.png' /><br />
+        <Box component="img" 
+          sx={{margin: '10px auto 0px auto',
+                width: .8, 
+                height: 'fit-content',
+              }}
+          src='\resources\standardinsurancelogo.png' /><br />
         <Box component="div" className="userInfoBox">
             <Box component='div' sx={{display: 'flex', alignItems: 'center'}}>
               <AccountCircleIcon fontSize='large'/>
@@ -114,7 +133,6 @@ export default function SideBar(props: any) {
         <List sx={{
           '& .MuiListItemButton-root': {
             color: 'black',
-            borderRadius: '10px 0px 0px 10px',
           },
           '& .MuiListItemButton-root:hover': {
             color: 'white',
@@ -182,6 +200,14 @@ export default function SideBar(props: any) {
               </List>
             </Collapse>
         </List>
+        <Box sx={{ position: "absolute", bottom: 0, marginBottom: "20px", marginLeft: "10px"}} >
+            <IconButton onClick={(() => logout())} type="submit" edge="end" sx={{borderRadius: 0}} disableRipple>
+              <LogoutIcon sx={{ fontSize: "1.5em", color: "#EAB959", transform: "scaleX(-1)"}} />
+              <Typography sx={{marginLeft: "10px", fontWeight: "500", fontFamily: "helvetica", fontSize: "17px"}}>
+                {/* Logout */}
+              </Typography>
+            </IconButton>
+          </Box>
         </Drawer>
         <Box className='centerChildren'>
           {props.children}

@@ -19,7 +19,7 @@ import { getLogin } from "../api/get";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = React.useState(false);
-  const [loginInfo, setLoginInfo] = React.useState();
+  const [loginInfo, setLoginInfo] = React.useState(Object);
   const {
     handleSubmit,
     register,
@@ -44,14 +44,17 @@ export default function SignIn() {
   const handleRegistration = (data: any) => {
     console.log(data);
     getLogin(data, { setLoginInfo });
-    console.log(loginInfo);
-    // if (loginInfo !== undefined) {
-    if (data !== undefined) {
-      // dispatch(saveId(loginInfo.id.toString()));
-      // dispatch(saveName(loginInfo.password.toString()));
+    if (loginInfo.data !== undefined) {
+      if(loginInfo.data.userId !== null) {
+        // when using with real values because my test user is all null so I can't use this
+        // dispatch(saveId(loginInfo.data.userid.toString()));
+        // dispatch(saveName(loginInfo.data.fullname.toString()));
+        // router.push("/home");
+      }
+    };
       dispatch(saveId(data.id));
-    }
-    router.push("/home");
+      dispatch(saveName("Timothy Mendoza"));
+      router.push("/home");
   };
 
   return (
@@ -90,7 +93,7 @@ export default function SignIn() {
                 message: "Too Short",
               },
               maxLength: {
-                value: 9,
+                value: 20,
                 message: "Too Long",
               },
             })}
@@ -131,7 +134,7 @@ export default function SignIn() {
                               edge="end"
                               onClick={() => {setShowPassword(!showPassword)}}
                             >
-                            {showPassword === false ? <VisibilityIcon sx={{color: '#EAB959'}}/> : <VisibilityOffIcon sx={{color: '#EAB959'}}/>}
+                            {showPassword === true ? <VisibilityIcon sx={{color: '#EAB959'}}/> : <VisibilityOffIcon sx={{color: '#EAB959'}}/>}
                             </IconButton>
                           </InputAdornment>
             }}
