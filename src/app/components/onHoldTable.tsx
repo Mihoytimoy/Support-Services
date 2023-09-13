@@ -78,9 +78,10 @@ const columns: GridColDef[] = [
 
 function unHold(
   data: any,
-  { setRows, firstResult, maxResult }: any
+  { setRows, firstResult, maxResult }: any,
+  selectedSize: number
 ) {
-  updateStatus(data, firstResult, maxResult, { setRows });
+  updateStatus(data, firstResult, (maxResult - selectedSize), { setRows });
 }
 
 function Pagination({
@@ -119,7 +120,11 @@ function CustomFooterComponent(props: any) {
         className={selectedSize !== 0 ? homeFormButton : ""}
         sx={{ marginLeft: "20px" }}
         onClick={() => {
-          unHold(apiRef.current.getSelectedRows().keys(), { ...props });
+          unHold(
+            apiRef.current.getSelectedRows().keys(),
+            { ...props },
+            selectedSize
+          );
         }}
         variant="outlined"
         disabled={selectedSize === 0}
