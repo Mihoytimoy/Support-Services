@@ -1,6 +1,5 @@
 import * as React from "react";
 import { updateStatus } from "../api/post";
-import { getOnHold } from "../api/get";
 import {
   DataGrid,
   GridColDef,
