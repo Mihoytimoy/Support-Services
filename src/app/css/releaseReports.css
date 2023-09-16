@@ -18,10 +18,10 @@
 }
 
 #onHoldSearch {
-    margin-left: 5%;
+    margin-left: 2.5%;
     align-self: center;
-    height: auto;
-    width: 10%;
+    height: 1.25em;
+    width: 7.5%;
     background-color: #3D405B;
     border-radius: 10px;
     border: 2px #3D405B;

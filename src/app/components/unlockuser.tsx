@@ -59,8 +59,8 @@ export default function UnlockUser() {
           name="empId"
           rules={{
             required: "Required",
-            minLength: { value: 9, message: "Too Short" },
-            maxLength: { value: 9, message: "Too Long" },
+            minLength: { value: 1, message: "Too Short" },
+            maxLength: { value: 20, message: "Too Long" },
           }}
           render={({ field, formState }) => (
             <TextField

@@ -42,7 +42,7 @@ export default function SignIn() {
   const runOnce = true;
   React.useEffect(() => {
     dispatch(reset());
-  }, [runOnce]);
+  }, [runOnce, dispatch]);
 
   React.useEffect(() => {
     console.log(status);
@@ -68,7 +68,7 @@ export default function SignIn() {
         setStatus(400);
       }
     }
-  }, [loginInfo]);
+  }, [loginInfo, dispatch, router]);
 
   const handleRegistration = (data: any) => {
     setStatus(0);
@@ -125,7 +125,7 @@ export default function SignIn() {
               {...register("id", {
                 required: "Required",
                 minLength: {
-                  value: 9,
+                  value: 1,
                   message: "Too Short",
                 },
                 maxLength: {
@@ -147,11 +147,11 @@ export default function SignIn() {
               {...register("password", {
                 required: "Required",
                 minLength: {
-                  value: 9,
+                  value: 1,
                   message: "Too Short",
                 },
                 maxLength: {
-                  value: 11,
+                  value: 20,
                   message: "Too Long",
                 },
               })}

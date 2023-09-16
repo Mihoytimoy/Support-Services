@@ -61,8 +61,8 @@ export default function UnlockPolicy() {
           name="branchCode"
           rules={{
             required: "Required",
-            minLength: { value: 2, message: "Too Short" },
-            maxLength: { value: 7, message: "Too Long" },
+            minLength: { value: 1, message: "Too Short" },
+            maxLength: { value: 20, message: "Too Long" },
           }}
           render={({ field, formState }) => (
             <TextField
@@ -87,8 +87,8 @@ export default function UnlockPolicy() {
           name="prodCode"
           rules={{
             required: "Required",
-            minLength: { value: 3, message: "Too Short" },
-            maxLength: { value: 3, message: "Too Long" },
+            minLength: { value: 1, message: "Too Short" },
+            maxLength: { value: 20, message: "Too Long" },
           }}
           render={({ field, formState }) => (
             <TextField
@@ -114,7 +114,7 @@ export default function UnlockPolicy() {
             required: "Required",
             pattern: { value: /^[0-9]*$/, message: "Numbers only" },
             minLength: { value: 1, message: "Too Short" },
-            maxLength: { value: 9, message: "Too Long" },
+            maxLength: { value: 20, message: "Too Long" },
           }}
           render={({ field, formState }) => (
             <TextField

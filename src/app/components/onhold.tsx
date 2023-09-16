@@ -50,7 +50,7 @@ export default function OnHold() {
           variant="overline"
           sx={{
             color: "#373737",
-            fontSize: {xs: '10px', sm: '20px'},
+            fontSize: {xs: '10px', sm: '14px'},
             textAlign: "left",
             flexBasis: "100%",
           }}
