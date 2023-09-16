@@ -87,7 +87,7 @@ export default function SignIn() {
         <Box
           id="logo"
           component="img"
-          src="\resources\standardinsurancelogo-black.png"
+          src="\resources\standardinsurancelogo.png"
         />
         <SuccessAlert
           status={status}

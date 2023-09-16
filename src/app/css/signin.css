@@ -1,4 +1,5 @@
 .outerBox {
+    background-color: #373737;
     position: relative;
     box-sizing: border-box;
     border-style: hidden;
@@ -27,8 +28,7 @@
 }
 
 #innerBox {
-    margin-top: 15%;
-    margin-bottom: 15%;
+    margin: 15% 2.5% 15% 2.5%;
     display: flex;
     flex-wrap: wrap;
 }
@@ -39,6 +39,8 @@
 }
 
 #titledForm {
+    background-color: white;
+    border-radius: 5%;
     width: 50%;
     padding: 5%;
 }
@@ -47,8 +49,8 @@
     font-size: 28px;
     margin: 0;
     text-align: center;
-    color: #455A64;
-    /* font-family: monospace; */
+    color: #373737;
+    font-family: monospace;
 }
 
 .loginFields {
@@ -62,12 +64,11 @@
 }
 
 #loginTitle {
-    width: fit-content;
     font-size: 18px;
     margin: 0;
     text-align: center;
     color: #455A64;
-    /* font-family: monospace; */
+    font-family: monospace;
 }
 
 #titledForm {
