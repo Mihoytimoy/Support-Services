@@ -91,6 +91,7 @@
 
 .Mui-selected {
     background-color: #EAB959 !important;
+    border-top: 1px solid #f8d388;
 }
 
 .Mui-selected .MuiTypography-root {
