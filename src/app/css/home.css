@@ -1,3 +1,8 @@
+/* #3D405B blueish */
+/* #F4F1DE whiteish */
+/* #F2CC8F  Yellowish */
+/* #E0E1DD  Yellowish */
+
 .centerChildren ::-webkit-scrollbar {
     width: 20px;
   }
@@ -7,18 +12,18 @@ background-color: transparent;
 }
 
 .centerChildren ::-webkit-scrollbar-thumb {
-background-color: #eedca4;
+background-color: #d3d7ff;
 border-radius: 20px;
 border: 6px solid transparent;
 background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-background-color: #EAB959;
+background-color: #767baa;
 }
 
 .homeContainer {
-    background-color: #555555;
+    background-color: white;
     height: 80vh;
     min-height: 60vh;
     max-height: 100vh;
@@ -27,7 +32,7 @@ background-color: #EAB959;
     border-radius: 10px;
     border-style: solid;
     border-width: 0px;
-    box-shadow: 2px 2px 5px;
+    box-shadow: -1px -1px 10px rgb(192, 192, 192);
     padding: 0px !important;
     overflow: auto;
 }
@@ -46,6 +51,7 @@ background-color: #EAB959;
     min-width: 50%;
     max-width: 90%;
     text-align: center;
+    box-shadow: 5px 5px 10px #8288b9;
     padding: 5%;
     background-color: white;
     border-radius: 15px;
@@ -53,7 +59,7 @@ background-color: #EAB959;
 }
 
 .homeForm .formTitle {
-    color: #373737;
+    color: #3D405B;
     font-size: 35px;
     font-weight: bold;
 }
@@ -67,7 +73,7 @@ background-color: #EAB959;
     top: 0px;
     padding-top: 2.5%;
     background-color: white;
-    border-bottom: 2px #373737;
+    border-bottom: 2px #3D405B;
     border-bottom-style: solid;
     z-index: 99;
 }
@@ -78,18 +84,18 @@ background-color: #EAB959;
     width: 100%;
     margin-top: 24px;
     margin-bottom: 24px;
-    background-color: #373737;
+    background-color: #3D405B;
     color: white;
     border: 1px;
     border-style: solid;
-    border-color: #373737;
+    border-color: #3D405B;
 }
 
 .homeForm .MuiButtonBase-root:hover { /*remove background of button on hover*/
     background-color: transparent;
 }
 
-.MuiButtonBase-root:hover .MuiSvgIcon-root { /*change color of search icon on hover*/
+.homeForm .MuiButtonBase-root:hover .MuiSvgIcon-root { /*change color of search icon on hover*/
     color: white;
 }
 

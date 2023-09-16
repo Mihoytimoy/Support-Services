@@ -173,9 +173,9 @@ export default function SignIn() {
                       }}
                     >
                       {showPassword === true ? (
-                        <VisibilityIcon sx={{ color: "#EAB959" }} />
+                        <VisibilityIcon sx={{ color: "#3D405B" }} />
                       ) : (
-                        <VisibilityOffIcon sx={{ color: "#EAB959" }} />
+                        <VisibilityOffIcon sx={{ color: "#3D405B" }} />
                       )}
                     </IconButton>
                   </InputAdornment>
@@ -183,9 +183,11 @@ export default function SignIn() {
               }}
             />
             <Box sx={{ mt: "2%" }}>
-              <IconButton type="submit" edge="end">
+              <IconButton type="submit" edge="end"
+                disableRipple
+              >
                 <ArrowCircleRightOutlinedIcon
-                  sx={{ fontSize: "2em", color: "#EAB959" }}
+                  sx={{ fontSize: "2em", color: "#3D405B" }}
                 />
               </IconButton>
             </Box>

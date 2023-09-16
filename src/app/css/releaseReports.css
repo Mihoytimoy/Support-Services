@@ -7,24 +7,40 @@
     margin: auto 0px auto 20px;
     width: 100px;
     height: 2.6em;
-    border-color: #EAB959;
-    background-color: #EAB959;
+    border-color: #3D405B;
+    background-color: #3D405B;
     color: white;
 }
 
-.MuiDataGrid-footerContainer .MuiButtonBase-root:hover{
+.reportTable .MuiDataGrid-row.Mui-selected,
+.reportTable .Mui-selected {
+    background-color: #c1c6fc;
+}
+
+#onHoldSearch {
+    margin-left: 5%;
+    align-self: center;
+    height: auto;
+    width: 10%;
+    background-color: #3D405B;
+    border-radius: 10px;
+    border: 2px #3D405B;
+    border-style: solid;
+} 
+.MuiButtonBase-root:hover#onHoldSearch, 
+.MuiDataGrid-footerContainer .MuiButtonBase-root:hover {
     background-color: transparent;
-    color: #EAB959;
-    border-color: #EAB959;
+    color: #3D405B;
+    border-color: #3D405B;
 }
 
 .stickySearch .MuiButtonBase-root:hover .MuiSvgIcon-root {
-    color: #373737;
+    color: #3D405B;
 }
 
 .MuiDataGrid-main .MuiDataGrid-columnHeaders { /*css for table header*/
     top: 0;
-    background-color: #373737;
+    background-color: #3D405B;
     position: sticky;
     color: white;
 }
@@ -43,7 +59,7 @@
     color: white !important;
 }
 
-.MuiDataGrid-main .Mui-checked {
+.reportTable .Mui-checked {
     color: white;
 }
 
@@ -61,4 +77,7 @@
         z-index: 99;
     }
 
+    #onHoldSearch {
+        width: 25%;
+    } 
 }

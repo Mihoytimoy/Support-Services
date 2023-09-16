@@ -92,13 +92,16 @@ export default function SideBar(props: any) {
             }}
         src='\resources\standardinsurancelogo.png' 
       />
-            <Box component='div' sx={{display: 'flex', alignItems: 'center'}}>
+            <Box component='div' sx={{display: 'flex', alignItems: 'center', marginTop: '10%'}}>
               <AccountCircleIcon  id="userLogo"/>
-              <Typography className="userInfo" sx={{fontSize: {xs: '12px', sm: '16px'}}}>
-                Name: {name} 
-                <br/>
-                ID: {id}
-              </Typography>
+              <Box sx={{display: "block", marginLeft: "5%"}}>
+                <Typography className="userInfo" sx={{color: "white", fontSize: {xs: '12px', sm: '15px'}}}>
+                  {name} 
+                </Typography>
+                <Typography className="userInfo" sx={{color: "#c1c6fc", marginTop: "-2.5px", fontSize: {xs: '10px', sm: '13px'}}}>
+                  {id}
+                </Typography>
+              </Box>
             </Box>
         </Box>
         <List id="mainList">

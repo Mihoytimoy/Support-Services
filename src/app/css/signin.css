@@ -1,5 +1,5 @@
 .outerBox {
-    background-color: #373737;
+    background-color: #3D405B;
     position: relative;
     box-sizing: border-box;
     border-style: hidden;
@@ -50,12 +50,15 @@
     margin: 0;
     text-align: center;
     color: #373737;
-    font-family: monospace;
 }
 
 .loginFields {
     width: 100%;
     flex-basis: 100%;
+}
+
+#titledForm .MuiButonBase-root:hover .MuiSvgIcon-root {
+    color: #3D405B;
 }
 
 @media only screen and (min-width: 0px) and (max-width: 599px)  {
@@ -66,9 +69,6 @@
 #loginTitle {
     font-size: 18px;
     margin: 0;
-    text-align: center;
-    color: #455A64;
-    font-family: monospace;
 }
 
 #titledForm {

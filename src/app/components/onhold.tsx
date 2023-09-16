@@ -91,16 +91,7 @@ export default function OnHold() {
           helperText={errors.maxResult?.message}
         />
         <IconButton
-          sx={{
-            marginLeft: {xs: "5%", sm: "5%"},
-            alignSelf: "center",
-            height: "auto",
-            width: {xs: "25%", sm: "10%"},
-            backgroundColor: "#373737",
-            borderRadius: "10px",
-            border: "2px #373737",
-            borderStyle: "solid",
-          }}
+          id="onHoldSearch"
           type="submit"
         >
           <SearchIcon sx={{ color: "white", fontSize: "1em" }} />
@@ -113,7 +104,8 @@ export default function OnHold() {
             color: "#373737",
             fontSize: {xs: '19px', sm: '22px'},
             fontWeight: "bold",
-            margin: "auto",
+            flexGrow: "1",
+            textAlignLast: "right"
           }}
         >
           On Hold Requests

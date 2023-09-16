@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+.MuiTypography-root {
+    font-family: 'Poppins' !important;
+}
+
+
 .MuiContainer-root .centerChildren {
     position: relative;
     display: flex;
@@ -10,25 +17,20 @@
 
 .userInfoBox {
     text-align: center;
-    background-color: #373737;
+    background-color: #3D405B;
     position: relative;
     height: 30%;
     width: 100%;
+    padding-bottom: 15%;
     border-bottom-style: hidden;
 }
 
 .userInfoBox .userInfo {
-    margin-top: 10%;
-    margin-left: 5%;
     position: relative;
-    color: white;
     text-align: left;
-    font-weight: 550;
-    font-family: monospace;
 }
 
 #userLogo {
-    margin-top: 10%;
     margin-left: 5%;
     font-size: 2.5em;
     color: white;
@@ -42,12 +44,12 @@
 #mainList {
     padding: 0px;
     height: 100%;
-    background-color: #373737;
+    background-color: #3D405B;
 }
 
 #drawerButton {
     flex-basis: 100%;
-    background-color: #EAB959;
+    background-color: #c1c6fc;
     color: white;
     position: absolute;
     top: 0px;
@@ -80,22 +82,24 @@
 
 .MuiList-root .MuiTypography-root {
     color: white;
-    font-weight: 400;
-    font-family: Helvetica;
     font-size: 17px;
 }
 
 .dropdownMenu .MuiListItemText-root .MuiTypography-root { /*change color of dropdown menu text*/
-    color: #373737;
+    color: #3D405B;
 }
 
-.Mui-selected {
-    background-color: #EAB959 !important;
-    border-top: 1px solid #f8d388;
+#mainList .Mui-selected {
+    background-color: #c1c6fc;
+    border-top: 1px solid #adb4ff;
 }
 
 .Mui-selected .MuiTypography-root {
-    color: white !important;
+    color: #3D405B !important;
+}
+
+.MuiDrawer-root .MuiSvgIcon-root { /*Sets user icon to this color*/
+    color: white;
 }
 
 .MuiDrawer-root .MuiSvgIcon-root { /*Sets user icon to this color*/
@@ -103,25 +107,25 @@
 }
 
 .dropdownMenu .MuiSvgIcon-root { /*change drowdown menu icon colors to this*/
-    color: #373737;
+    color: #3D405B;
 }
 
 .Mui-selected .MuiSvgIcon-root { /*Sets icons to this color while selected*/
-    color: white;
+    color: #3D405B;
 }
 
 #mainList .MuiListItemButton-root:hover, 
 .MuiListItemButton-root:hover .MuiSvgIcon-root { /*change color of icon on hover*/
-    color: white;
+    color: #3D405B;
 
 }
 
 #mainList .MuiListItemButton-root:hover { /*change color of background list item on hover*/
-    background-color: #EAB959;
+    background-color: #c1c6fc;
 }
 
 .MuiListItemButton-root:hover .MuiTypography-root { /*change color of text of list item on hover*/
-    color: white;
+    color: #3D405B;
 }
 
 @media only screen and (min-width: 0px) and (max-width: 599px)  {
