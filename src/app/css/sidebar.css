@@ -1,46 +1,73 @@
 .MuiContainer-root .centerChildren {
+    position: relative;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    place-content: center;
     height: 100%;
     width: 100%;
-    padding-top: 5%;
-    padding-bottom: 5%;
 }
 
 .userInfoBox {
-    padding-left: 2vh;
-    background-color: white;
+    text-align: center;
+    background-color: #373737;
     position: relative;
-    height: 80px;
+    height: 30%;
     width: 100%;
-    border-color: #EAB959;
-    border-bottom-width: 1px;
     border-bottom-style: hidden;
 }
 
 .userInfoBox .userInfo {
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-top: 10%;
+    margin-left: 5%;
     position: relative;
-    color: black;
-    font-size: 16px;
+    color: white;
     text-align: left;
     font-weight: 550;
     font-family: monospace;
 }
 
-.MuiPaper-root .MuiList-root {
-    padding: 0px;
+#userLogo {
+    margin-top: 10%;
+    margin-left: 5%;
+    font-size: 2.5em;
+    color: white;
 }
 
-.MuiList-root .dropdownMenu {
-    background-color: #f8efdd;
-    /* margin-right: 20px; */
+#logoutLogo {
+    font-size: 1.5em;
+    transform: scaleX(-1);
+}
+
+#mainList {
     padding: 0px;
-    /* padding-left: 20px; */
+    height: 100%;
+    background-color: #373737;
+}
+
+#drawerButton {
+    flex-basis: 100%;
+    background-color: #EAB959;
+    color: white;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 0px 10px 10px 10px;
+}
+
+.MuiDrawer-root .MuiDrawer-paperAnchorLeft {
+    height: inherit;
+    border-radius: 10px 0px 0px 10px;
+    position: absolute;
+    top: auto;
+    left: auto;
+  }
+
+.MuiList-root .dropdownMenu {
+    background-color: white;
+    padding: 0px;
     width: 100%;
     align-content: right;
-    border-top: 1px solid white;
 }
 
 .dropdownMenu .MuiListItemIcon-root {
@@ -50,26 +77,63 @@
     margin-left: 15px;
     font-size: 12px;
 }
-.MuiListItemText-root .MuiTypography-root {
+
+.MuiList-root .MuiTypography-root {
+    color: white;
     font-weight: 400;
     font-family: Helvetica;
     font-size: 17px;
 }
 
+.dropdownMenu .MuiListItemText-root .MuiTypography-root { /*change color of dropdown menu text*/
+    color: #373737;
+}
+
 .Mui-selected {
     background-color: #EAB959 !important;
+}
+
+.Mui-selected .MuiTypography-root {
     color: white !important;
 }
 
 .MuiDrawer-root .MuiSvgIcon-root { /*Sets user icon to this color*/
-    color: #EAB959;
+    color: white;
+}
+
+.dropdownMenu .MuiSvgIcon-root { /*change drowdown menu icon colors to this*/
+    color: #373737;
 }
 
 .Mui-selected .MuiSvgIcon-root { /*Sets icons to this color while selected*/
     color: white;
 }
 
+#mainList .MuiListItemButton-root:hover, 
 .MuiListItemButton-root:hover .MuiSvgIcon-root { /*change color of icon on hover*/
+    color: white;
+
+}
+
+#mainList .MuiListItemButton-root:hover { /*change color of background list item on hover*/
+    background-color: #EAB959;
+}
+
+.MuiListItemButton-root:hover .MuiTypography-root { /*change color of text of list item on hover*/
     color: white;
 }
 
+@media only screen and (min-width: 0px) and (max-width: 599px)  {
+    .dropdownMenu .MuiListItemIcon-root {
+        padding-left: 12px;
+    }
+    .dropdownMenu .MuiTypography-root {
+        margin-left: 10px;
+        font-size: 12px;
+    }
+    .MuiListItemText-root .MuiTypography-root {
+        font-weight: 400;
+        font-family: Helvetica;
+        font-size: 14px;
+    }
+}

@@ -4,7 +4,6 @@ import { useForm, Controller } from "react-hook-form";
 import { unlockPolicy } from "../api/put";
 import { useAppSelector } from "../hooks";
 
-import "../css/home.css";
 import React from "react";
 import SuccessAlert from "./successAlert";
 
@@ -41,12 +40,13 @@ export default function UnlockPolicy() {
   };
 
   return (
+    <>
     <Box className="homeForm">
-      <SuccessAlert status={status} alertOpen={alertOpen} setAlertOpen={setAlertOpen} message={message}/>
+    <SuccessAlert status={status} alertOpen={alertOpen} setAlertOpen={setAlertOpen} message={message}/>
       <Typography
+        className="formTitle"
         component="h1"
         variant="overline"
-        sx={{ color: "#EAB959", fontSize: 25, fontWeight: "bold" }}
       >
         Unlock Policy
       </Typography>
@@ -142,5 +142,6 @@ export default function UnlockPolicy() {
         </Button>
       </Box>
     </Box>
+    </>
   );
 }

@@ -3,7 +3,6 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { resetPWD } from "../api/get";
 
-import "../css/home.css";
 import { useAppSelector } from "../hooks";
 import React from "react";
 import SuccessAlert from "./successAlert";
@@ -42,9 +41,10 @@ export default function Reset() {
       }
 
     return (
+        <>
         <Box className="homeForm">
         <SuccessAlert status={status} alertOpen={alertOpen} setAlertOpen={setAlertOpen} message={message}/>
-            <Typography component="h1" variant="overline" sx={{color: '#EAB959', fontSize: 25, fontWeight: "bold"}}>
+            <Typography className="formTitle" component="h1" variant="overline">
                 Reset Password
             </Typography>
             <Box component="form" onSubmit={handleSubmit(handleRegistration)} noValidate sx={{ mt: 1, display: "grid"  }}>
@@ -109,5 +109,6 @@ export default function Reset() {
                 </Button>     
             </Box>
         </Box>
+        </>
     )
 }

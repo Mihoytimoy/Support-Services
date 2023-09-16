@@ -1,0 +1,64 @@
+.homeForm .MuiDataGrid-overlayWrapper { 
+    height: 100px
+}
+
+/* set size of button in the footer of the data grid */
+.reportTable .tableButton {
+    margin: auto 0px auto 20px;
+    width: 100px;
+    height: 2.6em;
+    border-color: #EAB959;
+    background-color: #EAB959;
+    color: white;
+}
+
+.MuiDataGrid-footerContainer .MuiButtonBase-root:hover{
+    background-color: transparent;
+    color: #EAB959;
+    border-color: #EAB959;
+}
+
+.stickySearch .MuiButtonBase-root:hover .MuiSvgIcon-root {
+    color: #373737;
+}
+
+.MuiDataGrid-main .MuiDataGrid-columnHeaders { /*css for table header*/
+    top: 0;
+    background-color: #373737;
+    position: sticky;
+    color: white;
+}
+
+.MuiDataGrid-main .MuiDataGrid-columnHeader:focus-within {
+    outline: 0px !important;
+}
+
+.MuiDataGrid-cell:focus-within {
+    outline: solid gray 1px !important;
+    outline: solid gray 0px !important;
+    outline-offset: -1px !important;
+}
+
+.MuiDataGrid-columnHeaders .MuiCheckbox-indeterminate {
+    color: white !important;
+}
+
+.MuiDataGrid-main .Mui-checked {
+    color: white;
+}
+
+.MuiButtonBase-root:hover.MuiCheckbox-root .MuiSvgIcon-root {
+    color: white;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 599px)  {
+    .homeForm .stickySearch {
+        /* height: ; */
+        display: flex;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0px;
+        z-index: 99;
+    }
+
+}

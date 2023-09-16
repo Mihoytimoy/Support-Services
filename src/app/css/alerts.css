@@ -1,0 +1,8 @@
+.MuiPaper-root.alertSuccess {
+    background-color: #5cb85c;
+    
+}
+
+.MuiPaper-root.alertWarning {
+    background-color: #FF6766;
+}

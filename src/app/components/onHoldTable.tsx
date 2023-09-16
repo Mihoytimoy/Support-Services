@@ -6,6 +6,7 @@ import {
   GridColDef,
   GridFooterContainer,
   GridPagination,
+  GridToolbar,
   gridPageCountSelector,
   useGridApiContext,
   useGridSelector,
@@ -17,9 +18,9 @@ interface OnHoldReq {
   requestNo: number;
   reportName: string;
   branch: string;
-  dateFrom: number;
-  dateTo: number;
-  dateRequested: number;
+  dateFrom: string;
+  dateTo: string;
+  dateRequested: string;
   requestedBy: string;
 }
 
@@ -27,9 +28,9 @@ function createData(
   requestNo: number,
   reportName: string,
   branch: string,
-  dateFrom: number,
-  dateTo: number,
-  dateRequested: number,
+  dateFrom: string,
+  dateTo: string,
+  dateRequested: string,
   requestedBy: string
 ): OnHoldReq {
   return {
@@ -53,10 +54,10 @@ function createDataLoop(values: any) {
           values.data.items[i].requestNo,
           values.data.items[i].reportName,
           values.data.items[i].branch,
-          values.data.items[i].dateFrom,
-          values.data.items[i].dateTo,
-          values.data.items[i].dateRequested,
-          values.data.items[i].requestedBy
+          new Date(values.data.items[i].dateFrom).toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"}),
+          new Date(values.data.items[i].dateTo).toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"}),
+          new Date(values.data.items[i].dateRequested).toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"}),
+          values.data.items[i].requestedBy,
         )
       );
     }
@@ -67,13 +68,13 @@ function createDataLoop(values: any) {
 }
 
 const columns: GridColDef[] = [
-  { field: "requestNo", headerName: "Request No.", width: 130 },
-  { field: "reportName", headerName: "Report Name", width: 140 },
-  { field: "branch", headerName: "Branch", width: 100 },
-  { field: "dateFrom", headerName: "Date From", width: 150 },
-  { field: "dateTo", headerName: "Date To", width: 150 },
-  { field: "dateRequested", headerName: "Date Requested", width: 160 },
-  { field: "requestedBy", headerName: "Requested By", width: 130 },
+  { field: "requestNo", headerName: "Request No.",  headerClassName: "colHeader", width: 130 },
+  { field: "reportName", headerName: "Report Name", headerClassName: "colHeader", width: 140 },
+  { field: "branch", headerName: "Branch", headerClassName: "colHeader", width: 100 },
+  { field: "dateFrom", headerName: "Date From", headerClassName: "colHeader", width: 150 },
+  { field: "dateTo", headerName: "Date To", headerClassName: "colHeader", width: 150 },
+  { field: "dateRequested", headerName: "Date Requested", headerClassName: "colHeader", width: 160 },
+  { field: "requestedBy", headerName: "Requested By", headerClassName: "colHeader", width: 130 },
 ];
 
 function unHold(
@@ -111,13 +112,13 @@ function CustomPagination(props: any) {
 
 function CustomFooterComponent(props: any) {
   const apiRef = useGridApiContext();
-  const homeFormButton = "homeFormButton";
+  const tableButton = "tableButton";
   let selectedSize = apiRef.current.getSelectedRows().size;
 
   return (
     <GridFooterContainer>
       <Button
-        className={selectedSize !== 0 ? homeFormButton : ""}
+        className={selectedSize !== 0 ? tableButton : ""}
         sx={{ marginLeft: "20px" }}
         onClick={() => {
           unHold(
@@ -159,20 +160,25 @@ export default function OnHoldTable({
   return (
     <Box
       component="div"
-      sx={{ height: "inherit", width: "auto", maxWidth: "100%" }}
+      sx={{ height: "inherit", width: "inherit", maxWidth: "100%" }}
     >
       <DataGrid
         className="reportTable"
         getRowId={(row: any) => row.requestNo}
         rows={tableData}
         columns={columns}
-        slots={{ footer: CustomFooterComponent }}
+        slots={{ footer: CustomFooterComponent, toolbar: GridToolbar}}
         slotProps={{
           footer: {
             setRows: setRows(),
             firstResult: firstResult,
             maxResult: maxResult,
           },
+          toolbar: {
+            showQuickFilter: true,
+            printOptions: { disableToolbarButton: true },
+            csvOptions: { disableToolbarButton: true },
+          }
         }}
         pagination
         initialState={{
@@ -182,6 +188,9 @@ export default function OnHoldTable({
         }}
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection
+        disableColumnFilter
+        disableColumnSelector
+        disableDensitySelector
         disableRowSelectionOnClick
         hideFooterSelectedRowCount
       />

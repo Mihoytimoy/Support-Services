@@ -18,10 +18,10 @@ background-color: #EAB959;
 }
 
 .homeContainer {
-    background-color: #EAB959;
+    background-color: #555555;
     height: 80vh;
     min-height: 60vh;
-    max-height: 90vh;
+    max-height: 100vh;
     margin: auto;
     margin-top: 10vh;
     border-radius: 10px;
@@ -38,9 +38,11 @@ background-color: #EAB959;
 }
 
 .homeContainer .homeForm {
-    margin: auto;
+    position: absolute;
     display: block;
-    max-height: 100%;
+    overflow: auto;
+    height: auto;
+    max-height: 90%;
     min-width: 50%;
     max-width: 90%;
     text-align: center;
@@ -50,86 +52,65 @@ background-color: #EAB959;
     overflow-y: auto;
 }
 
+.homeForm .formTitle {
+    color: #373737;
+    font-size: 35px;
+    font-weight: bold;
+}
+
 .homeForm .stickySearch {
     height: auto;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     position: sticky;
     top: 0px;
     padding-top: 2.5%;
     background-color: white;
-    border-bottom: 2px #EAB959;
+    border-bottom: 2px #373737;
     border-bottom-style: solid;
     z-index: 99;
 }
 
 .homeForm .homeFormButton {
-    /* flex-basis: 100%; */
+    flex-basis: 100%;
     height: 4em;
     width: 100%;
     margin-top: 24px;
     margin-bottom: 24px;
-    background-color: #EAB959;
+    background-color: #373737;
     color: white;
     border: 1px;
     border-style: solid;
-    border-color: #EAB959;
+    border-color: #373737;
 }
 
-.homeForm .MuiButtonBase-root:hover {
+.homeForm .MuiButtonBase-root:hover { /*remove background of button on hover*/
     background-color: transparent;
-    color: #EAB959;
 }
 
-.homeForm .textField:focus{
-    border-color: red;
+.MuiButtonBase-root:hover .MuiSvgIcon-root { /*change color of search icon on hover*/
+    color: white;
 }
 
-.homeForm .MuiDataGrid-overlayWrapper { 
-    height: 100px
-}
 
-/* set size of button in the footer of the data grid */
-.MuiDataGrid-footerContainer .homeFormButton { 
-    margin: auto 0px auto 20px;
-    width: 100px;
-    height: 2.6em;
-}
+@media only screen and (min-width: 0px) and (max-width: 599px)  {
+    .homeContainer {
+        height: 100vh;
+        margin: 0px;
+    }
 
-.MuiDataGrid-footerContainer .MuiButtonBase-root:hover{
-    background-color: transparent;
-    color: #EAB959;
-    border-color: #EAB959;
-}
+    .homeForm .formTitle {
+        font-size: 25px;
+        line-height: 1.75em;
+    }
 
-.stickySearch .MuiButtonBase-root:hover .MuiSvgIcon-root {
-    color: #EAB959;
-}
+    .homeForm .stickySearch {
+        display: flex;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0px;
+        z-index: 99;
+    }
 
-.MuiDataGrid-main .MuiDataGrid-columnHeaders {
-    top: 0;
-    position: sticky;
 }
-
-.MuiDataGrid-main .MuiDataGrid-columnHeader:focus-within {
-    outline: 0px !important;
-}
-
-.MuiDataGrid-cell:focus-within {
-    /* outline: solid gray 1px !important; */
-    outline: solid gray 0px !important;
-    /* outline-offset: -1px !important; */
-}
-
-.MuiDataGrid-columnHeaders .MuiCheckbox-indeterminate {
-    color: #EAB959 !important;
-}
-
-.MuiDataGrid-main .Mui-checked {
-    color: #EAB959;
-}
-
-.MuiDataGrid-columnHeaderTitleContainerContent .MuiButtonBase-root:hover {
-    color: #EAB959;
-}
-

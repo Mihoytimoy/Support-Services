@@ -1,16 +1,77 @@
 .outerBox {
-    max-width: 550px;
+    position: relative;
     box-sizing: border-box;
-    padding: 5% 0% 5% 0%;
-    /* border-color: #EAB959; */
     border-style: hidden;
     border-radius: 20px;
-    border-width: 1px;
-    box-shadow: 2px 2px 5px;
+    box-shadow: 2px 5px 10px rgb(173, 173, 173); 
     margin: auto;
-    margin-top: 20%;
+    margin-top: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+#logo {
+    position: absolute;
+    display: block;
+    left: 0px;
+    top: 0px;
+    width: 15%;
+    height: max-content;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+#signInLogo {
+    width: 50%;
+}
+
+#innerBox {
+    margin-top: 15%;
+    margin-bottom: 15%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+#logo.div {
+    width: 100%;
+}
+
+#titledForm {
+    width: 50%;
+    padding: 5%;
+}
+
+#loginTitle {
+    font-size: 28px;
+    margin: 0;
+    text-align: center;
+    color: #455A64;
+    /* font-family: monospace; */
+}
+
+.loginFields {
+    width: 100%;
+    flex-basis: 100%;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 599px)  {
+#signInLogo {
+    display: none;
+}
+
+#loginTitle {
+    width: fit-content;
+    font-size: 18px;
+    margin: 0;
+    text-align: center;
+    color: #455A64;
+    /* font-family: monospace; */
+}
+
+#titledForm {
+    width: 100%;
+}
+
+}

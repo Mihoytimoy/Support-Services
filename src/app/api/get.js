@@ -62,7 +62,7 @@ export async function getOnHold(data, { setRows }) {
     });
 }
 
-export async function getLogin(data, { setLoginInfo }) {
+export async function getLogin(data,  setLoginInfo) {
   const token = encodeURIComponent(btoa(data.id) + "|" +  btoa(data.password));
   const loginUrl =
     "https://gymp3t84o3.execute-api.ap-southeast-1.amazonaws.com/dev1/emp/auth?token=" +

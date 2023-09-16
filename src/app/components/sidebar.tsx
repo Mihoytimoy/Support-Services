@@ -17,13 +17,12 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
 import LogoutIcon from '@mui/icons-material/Logout';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Collapse, Typography, Container, IconButton } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { useAppSelector, useAppDispatch } from "../hooks"; 
 import { mainMenuState, subMenuState } from '../features/support/support-slice';
-
-const drawerWidth = 240;
 
 export default function SideBar(props: any) {
   const router = useRouter();
@@ -36,6 +35,13 @@ export default function SideBar(props: any) {
   const tempName: string = useAppSelector((state) => state.support.name);
   let tempMainSelect: string = useAppSelector(state => state.support.main);
   let tempSubSelect: string = useAppSelector(state =>state.support.sub);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  
 
   const saveMenu = (main:string, sub:string) => { //code here changes values in the store that concern the menu selections
     if(tempMainSelect === "") { //check if nothing has been selected yet
@@ -76,69 +82,26 @@ export default function SideBar(props: any) {
     setSubSelect(tempSubSelect);
   }, [tempMainSelect, tempSubSelect])
 
-  return (
-    <Box sx={{ display: 'flex', height: '100%'}}>
-      <CssBaseline />
-      <Drawer
-        sx={{
-            height: '80vh',
-            minHeight: '60vh',
-            maxHeight: '90vh',
-            width: drawerWidth,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              height: 1,
-              width: drawerWidth,
-              boxSizing: 'border-box',
-            },
-            '& .MuiPaper-root': {
-              maxWidth: 1,
-              height: 'inherit',
-              position: 'relative',
-              top: 'auto',
-              left: 'auto',
-              borderRadius:  '0px 20px 0px 0px',
-              borderWidth: '1px',
-              borderStyle: 'hidden',
-
-            },
-            '& .MuiDrawer-paperAnchorLeft': {
-              maxWidth: 1,
-              height: 'inherit',
-              borderRadius: '10px 0px 0px 10px',
-              position: 'absolute',
-              top: 'auto',
-              left: 'auto',
-            }
-          }}
-          variant="permanent"
-          anchor="left"
-      >
-        <Box component="img" 
-          sx={{margin: '10px auto 0px auto',
-                width: .8, 
-                height: 'fit-content',
-              }}
-          src='\resources\standardinsurancelogo.png' /><br />
-        <Box component="div" className="userInfoBox">
+  const drawer = (
+    <>
+    <Box component="div" className="userInfoBox">
+      <Box component="img" 
+        sx={{margin: '10% auto 0px auto',
+              width: .8, 
+              height: 'fit-content',
+            }}
+        src='\resources\standardinsurancelogo.png' 
+      />
             <Box component='div' sx={{display: 'flex', alignItems: 'center'}}>
-              <AccountCircleIcon fontSize='large'/>
-              <Typography className="userInfo">
+              <AccountCircleIcon  id="userLogo"/>
+              <Typography className="userInfo" sx={{fontSize: {xs: '12px', sm: '16px'}}}>
                 Name: {name} 
                 <br/>
                 ID: {id}
               </Typography>
             </Box>
         </Box>
-        <List sx={{
-          '& .MuiListItemButton-root': {
-            color: 'black',
-          },
-          '& .MuiListItemButton-root:hover': {
-            color: 'white',
-            backgroundColor: '#EAB959',
-          }
-        }}>
+        <List id="mainList">
           {/* User Services Menu */}
             <ListItem key={"User Services"} disablePadding>
               <ListItemButton selected={mainSelect === "User Services"} onClick={() => saveMenu("User Services", "")}>
@@ -178,19 +141,19 @@ export default function SideBar(props: any) {
               </List>
             </Collapse>
             {/* Reports Menu */}
-            <ListItem key={"Generate Reports"} disablePadding>
-              <ListItemButton selected={mainSelect === "Generate Reports"} onClick={() => saveMenu("Generate Reports", "")}>
+            <ListItem key={"Release Reports"} disablePadding>
+              <ListItemButton selected={mainSelect === "Release Reports"} onClick={() => saveMenu("Release Reports", "")}>
                 <ListItemIcon>
                     <AssessmentIcon fontSize='large'/>  
                 </ListItemIcon>
-                <ListItemText primary={"Generate Reports"} />
-                {mainSelect === "Generate Reports" ? <ExpandLess /> : <ExpandMore />}
+                <ListItemText primary={"Release Reports"} />
+                {mainSelect === "Release Reports" ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
             </ListItem>
-            <Collapse in={mainSelect === "Generate Reports"? true : false} timeout="auto" unmountOnExit>
+            <Collapse in={mainSelect === "Release Reports"? true : false} timeout="auto" unmountOnExit>
               <List component="div" className='dropdownMenu'>
                 <ListItem key={"On-Hold"} disablePadding onClick={changePage("On-Hold")}>
-                  <ListItemButton selected={subSelect === "On-Hold"} onClick={() => saveMenu("Generate Reports", "On-Hold")}>
+                  <ListItemButton selected={subSelect === "On-Hold"} onClick={() => saveMenu("Release Reports", "On-Hold")}>
                     <ListItemIcon>
                       <PauseCircleOutlineIcon />
                     </ListItemIcon>
@@ -202,14 +165,57 @@ export default function SideBar(props: any) {
         </List>
         <Box sx={{ position: "absolute", bottom: 0, marginBottom: "20px", marginLeft: "10px"}} >
             <IconButton onClick={(() => logout())} type="submit" edge="end" sx={{borderRadius: 0}} disableRipple>
-              <LogoutIcon sx={{ fontSize: "1.5em", color: "#EAB959", transform: "scaleX(-1)"}} />
+              <LogoutIcon id="logoutLogo" />
               <Typography sx={{marginLeft: "10px", fontWeight: "500", fontFamily: "helvetica", fontSize: "17px"}}>
                 {/* Logout */}
               </Typography>
             </IconButton>
           </Box>
+    </>
+  )
+
+  return (
+    <Box sx={{ display: 'flex', height: '100%'}}>
+      <CssBaseline />
+      <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            height: {xs: '100vh'},
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '25vh' },
+          }}
+        >
+          {drawer}
         </Drawer>
-        <Box className='centerChildren'>
+
+      <Drawer
+        sx={{
+            display: { xs: 'none', sm: 'block' },
+            height: '80vh',
+            minHeight: '60vh',
+            maxHeight: '90vh',
+            width: '25vh',
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: '25vh',
+              boxSizing: 'border-box',
+            }
+          }}
+          variant="permanent"
+          anchor="left"
+          open
+      >
+        {drawer}
+        </Drawer>
+        <Box className='centerChildren' sx={{width: '100%'}}>
+          <IconButton id="drawerButton" onClick={handleDrawerToggle} sx={{display: {sm: 'none'}}}>
+            <MenuIcon></MenuIcon>
+          </IconButton>
           {props.children}
         </Box>
     </Box>

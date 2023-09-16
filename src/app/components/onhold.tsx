@@ -2,11 +2,10 @@
 import { getOnHold } from "../api/get";
 import { useForm } from "react-hook-form";
 import SearchIcon from "@mui/icons-material/Search";
-import "../css/home.css";
 import { Box, IconButton, TextField, Typography } from "@mui/material";
 import React from "react";
 import OnHoldTable from "./onHoldTable";
-import { setMaxIdleHTTPParsers } from "http";
+import "../css/releaseReports.css"
 
 export default function OnHold() {
   const [rows, setRows] = React.useState();
@@ -50,8 +49,8 @@ export default function OnHold() {
           component="h1"
           variant="overline"
           sx={{
-            color: "#EAB959",
-            fontSize: 15,
+            color: "#373737",
+            fontSize: {xs: '10px', sm: '20px'},
             textAlign: "left",
             flexBasis: "100%",
           }}
@@ -67,7 +66,7 @@ export default function OnHold() {
             },
           })}
           variant="standard"
-          sx={{ m: 0, width: "15%", height: "10px" }}
+          sx={{ m: 0, width: {xs: "30%", sm: "15%"}, height: "10px" }}
           id="firstResult"
           label="Page Number"
           name="firstResult"
@@ -84,7 +83,7 @@ export default function OnHold() {
             },
           })}
           variant="standard"
-          sx={{ m: 0, width: "15%", height: "10px", marginLeft: "20px" }}
+          sx={{ m: 0, width: {xs: "30%", sm: "15%"}, height: "10px", marginLeft: "20px" }}
           id="maxResult"
           label="Max Result"
           name="maxResult"
@@ -92,15 +91,14 @@ export default function OnHold() {
           helperText={errors.maxResult?.message}
         />
         <IconButton
-          size="large"
           sx={{
-            marginLeft: "10px",
+            marginLeft: {xs: "5%", sm: "5%"},
             alignSelf: "center",
-            height: "1.25em",
-            width: "10%",
-            backgroundColor: "#EAB959",
+            height: "auto",
+            width: {xs: "25%", sm: "10%"},
+            backgroundColor: "#373737",
             borderRadius: "10px",
-            border: "2px #EAB959",
+            border: "2px #373737",
             borderStyle: "solid",
           }}
           type="submit"
@@ -111,8 +109,9 @@ export default function OnHold() {
           component="h1"
           variant="overline"
           sx={{
-            color: "#EAB959",
-            fontSize: 25,
+            marginTop: {xs: "5%", sm: "0"},
+            color: "#373737",
+            fontSize: {xs: '19px', sm: '22px'},
             fontWeight: "bold",
             margin: "auto",
           }}
@@ -120,7 +119,7 @@ export default function OnHold() {
           On Hold Requests
         </Typography>
       </Box>
-      <br />
+      {/* <br /> */}
       <OnHoldTable
         values={rows}
         setRows={() => setRows}

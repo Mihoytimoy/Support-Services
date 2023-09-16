@@ -2,7 +2,6 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { unlockUser } from "../api/put";
 import { Controller, useForm } from "react-hook-form";
-import "../css/home.css";
 import { useAppSelector } from "../hooks";
 import React from "react";
 import SuccessAlert from "./successAlert";
@@ -39,12 +38,13 @@ export default function UnlockUser() {
   };
 
   return (
+    <>
     <Box className="homeForm">
-      <SuccessAlert status={status} alertOpen={alertOpen} setAlertOpen={setAlertOpen} message={message}/>
+    <SuccessAlert status={status} alertOpen={alertOpen} setAlertOpen={setAlertOpen} message={message}/>
       <Typography
+        className="formTitle"
         component="h1"
         variant="overline"
-        sx={{ color: "#EAB959", fontSize: 25, fontWeight: "bold" }}
       >
         Unlock User
       </Typography>
@@ -89,5 +89,6 @@ export default function UnlockUser() {
         </Button>
       </Box>
     </Box>
+    </>
   );
 }
